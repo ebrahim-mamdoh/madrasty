@@ -1,6 +1,7 @@
 import {
   BookOpen,
   CalendarCheck,
+  CalendarClock,
   ClipboardList,
   FileText,
   GraduationCap,
@@ -22,6 +23,7 @@ export type NavKey =
   | "dashboard"
   | "schools"
   | "structure"
+  | "timetable"
   | "students"
   | "teachers"
   | "parents"
@@ -35,7 +37,8 @@ export type NavKey =
   | "settings"
   | "my_classes"
   | "my_subjects"
-  | "my_grades";
+  | "my_grades"
+  | "schedule";
 
 export type NavItem = {
   key: NavKey;
@@ -55,6 +58,12 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
   admin: [
     { key: "dashboard", href: "/admin", icon: LayoutDashboard },
     { key: "structure", href: "/admin/structure", icon: Layers, permission: "structure.view" },
+    {
+      key: "timetable",
+      href: "/admin/timetable",
+      icon: CalendarClock,
+      permission: "structure.view",
+    },
     { key: "students", href: "/admin/students", icon: GraduationCap, permission: "students.view" },
     { key: "teachers", href: "/admin/teachers", icon: Users, permission: "teachers.view" },
     { key: "parents", href: "/admin/parents", icon: UsersRound, permission: "parents.view" },
@@ -86,6 +95,7 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
   teacher: [
     { key: "dashboard", href: "/teacher", icon: LayoutDashboard },
     { key: "my_classes", href: "/teacher/classes", icon: Layers },
+    { key: "schedule", href: "/teacher/schedule", icon: CalendarClock },
     { key: "attendance", href: "/teacher/attendance", icon: CalendarCheck },
     { key: "homework", href: "/teacher/homework", icon: NotebookPen, feature: "homework" },
     { key: "exams", href: "/teacher/exams", icon: ClipboardList, feature: "exams" },
@@ -95,6 +105,7 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
   student: [
     { key: "dashboard", href: "/student", icon: LayoutDashboard },
     { key: "my_subjects", href: "/student/subjects", icon: BookOpen },
+    { key: "schedule", href: "/student/schedule", icon: CalendarClock },
     { key: "attendance", href: "/student/attendance", icon: CalendarCheck },
     { key: "homework", href: "/student/homework", icon: NotebookPen, feature: "homework" },
     { key: "exams", href: "/student/exams", icon: ClipboardList, feature: "exams" },

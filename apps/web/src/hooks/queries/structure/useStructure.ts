@@ -8,6 +8,7 @@ import type {
   SubjectInput,
 } from "@madrasty/core";
 import type { Services } from "@madrasty/api";
+import { timetableQueryKey } from "@/hooks/queries/timetable/useTimetable";
 import { useSchoolId } from "@/hooks/useSession";
 import { getBrowserServices } from "@/lib/services.client";
 
@@ -24,8 +25,8 @@ type StructureService = Services["structure"];
 const structure = () => getBrowserServices().structure;
 
 /**
- * Every structure write can change counts shown on other tabs (classes per year/grade…),
- * so a successful mutation refreshes the whole structure cache.
+ * Every structure write can change counts shown on other tabs (classes per year/grade…) and the
+ * timetable (removing a class subject frees its slots), so both caches are refreshed.
  */
 function useStructureMutation<TVariables>(
   run: (service: StructureService, schoolId: string, variables: TVariables) => Promise<unknown>,
@@ -35,7 +36,11 @@ function useStructureMutation<TVariables>(
 
   return useMutation({
     mutationFn: (variables: TVariables) => run(structure(), schoolId, variables),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: structureQueryKey }),
+    onSuccess: () =>
+      Promise.all([
+        queryClient.invalidateQueries({ queryKey: structureQueryKey }),
+        queryClient.invalidateQueries({ queryKey: timetableQueryKey }),
+      ]),
   });
 }
 

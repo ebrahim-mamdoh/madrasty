@@ -5,6 +5,7 @@ import { createSchoolsService } from "./services/schools";
 import { createSessionService } from "./services/session";
 import { createStructureService } from "./services/structure";
 import { createTeachingService } from "./services/teaching";
+import { createTimetableService } from "./services/timetable";
 
 /**
  * Entry point of the service layer. Host apps create a Supabase client for their platform
@@ -18,6 +19,7 @@ export function createServices(client: TypedSupabaseClient) {
     people: createPeopleService(client),
     teaching: createTeachingService(client),
     roles: createRolesService(client),
+    timetable: createTimetableService(client),
   };
 }
 

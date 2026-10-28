@@ -61,7 +61,11 @@
     "end_after_start": "End date must be after the start date",
     "code_max": "Code must be at most 20 characters",
     "code_format": "Letters, digits and dashes only",
-    "phone": "Invalid phone number"
+    "phone": "Invalid phone number",
+    "time": "Enter a valid time",
+    "end_after_start_time": "The end time must be after the start time",
+    "period_number": "Period number must be between 1 and 20",
+    "study_days": "Pick at least one study day"
   },
   "errors": {
     "unauthenticated": "Your session expired, please sign in again",
@@ -80,7 +84,10 @@
     "no_access": "This account is not linked to any school",
     "slug_taken": "This slug is already used by another school",
     "in_use": "Can't delete: other records depend on it",
-    "name_taken": "This name is already in use"
+    "name_taken": "This name is already in use",
+    "teacher_busy": "This teacher already has a lesson in another class at that time",
+    "period_overlap": "This time overlaps another period",
+    "period_number_taken": "This period number is already used"
   },
   "auth": {
     "title": "Sign in",
@@ -113,7 +120,9 @@
     "settings": "School settings",
     "my_classes": "My classes",
     "my_subjects": "My subjects",
-    "my_grades": "My grades"
+    "my_grades": "My grades",
+    "timetable": "Timetable",
+    "schedule": "My schedule"
   },
   "dashboard": {
     "welcome": "Welcome, {name}",
@@ -187,7 +196,10 @@
     "staff": "Staff",
     "roles": "Roles & permissions",
     "settings": "School settings",
-    "school_detail": "School details"
+    "school_detail": "School details",
+    "timetable": "Timetable",
+    "schedule": "My schedule",
+    "my_subjects": "My subjects"
   },
   "structure": {
     "title": "Academic structure",
@@ -453,5 +465,68 @@
     "primary_color": "Primary color",
     "secondary_color": "Secondary color",
     "saved": "School settings saved"
+  },
+  "timetable": {
+    "title": "Timetable",
+    "subtitle": "Daily periods, study days and each class's weekly timetable",
+    "tabs": {
+      "timetable": "Class timetables",
+      "periods": "Periods & study days"
+    },
+    "weekdays": {
+      "0": "Sunday",
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday"
+    },
+    "period": "Period",
+    "period_n": "Period {n}",
+    "class": "Class",
+    "subject": "Subject",
+    "choose_subject": "Choose a subject",
+    "no_teacher": "No teacher",
+    "empty_slot": "Empty",
+    "clear_slot": "Clear slot",
+    "slot_cleared": "Slot cleared",
+    "edit_hint": "Click any cell to choose its subject. A teacher can't have two lessons at the same time.",
+    "no_class_subjects": "This class has no subjects — add them in “Academic structure → Classes”",
+    "no_current_year": "Set a current academic year in “Academic structure” first",
+    "no_classes": "There are no classes in the current year",
+    "no_periods_hint": "Add the school day's periods in the “Periods & study days” tab",
+    "study_days": "Study days",
+    "study_days_hint": "The days shown in weekly timetables across every portal",
+    "study_days_saved": "Study days saved",
+    "periods": {
+      "title": "Daily periods",
+      "add": "Add period",
+      "create_title": "New period",
+      "edit_title": "Edit period",
+      "number": "Period number",
+      "time": "Time",
+      "starts_at": "Starts",
+      "ends_at": "Ends",
+      "empty": "No periods set yet",
+      "empty_hint": "Add the periods with their times to start building timetables",
+      "delete_title": "Delete period?",
+      "delete_description": "Period {n} will be deleted. It can't be deleted while any timetable uses it."
+    },
+    "my": {
+      "title": "My schedule",
+      "teacher_subtitle": "Your weekly lessons across all classes",
+      "student_subtitle": "Your class's weekly timetable",
+      "teacher_empty": "No lessons are assigned to you in the timetable yet",
+      "student_empty": "Your class's timetable isn't ready yet",
+      "no_class": "You haven't been placed in a class for the current year yet"
+    }
+  },
+  "subjects_page": {
+    "title": "My subjects",
+    "subtitle": "Your class's subjects this year and who teaches them",
+    "empty": "Your class has no subjects yet",
+    "no_class": "You haven't been placed in a class for the current year yet",
+    "no_teacher": "Teacher not assigned yet"
   }
 }

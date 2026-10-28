@@ -19,6 +19,8 @@ export type School = {
   branding: SchoolBranding;
   locale: "ar" | "en";
   timezone: string;
+  /** Weekdays the school teaches on (0 = Sunday … 6 = Saturday). */
+  studyDays: number[];
   createdAt: string;
 };
 
@@ -154,4 +156,33 @@ export type SchoolAdmin = {
   fullName: string;
   email: string | null;
   isActive: boolean;
+};
+
+/** One period of the school day (e.g. "1st period, 08:00–08:45"). */
+export type Period = {
+  id: string;
+  number: number;
+  /** `HH:MM` */
+  startsAt: string;
+  /** `HH:MM` */
+  endsAt: string;
+};
+
+/** One filled slot of a weekly timetable. */
+export type TimetableEntry = {
+  id: string;
+  weekday: number;
+  periodId: string;
+  classSubjectId: string;
+  class: { id: string; name: string };
+  subject: { id: string; name: string };
+  teacher: { id: string; fullName: string } | null;
+};
+
+/** A subject of the student's class with the teacher who teaches it. */
+export type StudentSubject = {
+  id: string;
+  subjectName: string;
+  subjectCode: string | null;
+  teacherName: string | null;
 };

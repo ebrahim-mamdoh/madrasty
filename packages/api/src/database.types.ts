@@ -267,6 +267,48 @@ export type Database = {
           },
         ]
       }
+      periods: {
+        Row: {
+          created_at: string
+          ends_at: string
+          id: string
+          number: number
+          school_id: string
+          starts_at: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at: string
+          id?: string
+          number: number
+          school_id: string
+          starts_at: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string
+          id?: string
+          number?: number
+          school_id?: string
+          starts_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "periods_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "periods_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       permissions: {
         Row: {
           key: string
@@ -453,6 +495,7 @@ export type Database = {
           secondary_color: string
           slug: string
           status: Database["public"]["Enums"]["school_status"]
+          study_days: number[]
           timezone: string
           updated_at: string
         }
@@ -466,6 +509,7 @@ export type Database = {
           secondary_color?: string
           slug: string
           status?: Database["public"]["Enums"]["school_status"]
+          study_days?: number[]
           timezone?: string
           updated_at?: string
         }
@@ -479,6 +523,7 @@ export type Database = {
           secondary_color?: string
           slug?: string
           status?: Database["public"]["Enums"]["school_status"]
+          study_days?: number[]
           timezone?: string
           updated_at?: string
         }
@@ -641,6 +686,65 @@ export type Database = {
           },
         ]
       }
+      timetable_entries: {
+        Row: {
+          class_id: string
+          class_subject_id: string
+          created_at: string
+          id: string
+          period_id: string
+          school_id: string
+          weekday: number
+        }
+        Insert: {
+          class_id: string
+          class_subject_id: string
+          created_at?: string
+          id?: string
+          period_id: string
+          school_id: string
+          weekday: number
+        }
+        Update: {
+          class_id?: string
+          class_subject_id?: string
+          created_at?: string
+          id?: string
+          period_id?: string
+          school_id?: string
+          weekday?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "timetable_entries_class_subject_fkey"
+            columns: ["class_subject_id", "class_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "class_subjects"
+            referencedColumns: ["id", "class_id", "school_id"]
+          },
+          {
+            foreignKeyName: "timetable_entries_period_fkey"
+            columns: ["period_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "periods"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "timetable_entries_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "timetable_entries_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       schools_overview: {
@@ -675,6 +779,13 @@ export type Database = {
       }
     }
     Functions: {
+      class_teachers: {
+        Args: { p_class_id: string }
+        Returns: {
+          full_name: string
+          id: string
+        }[]
+      }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
       my_permissions: { Args: never; Returns: string[] }
       platform_stats: {
@@ -694,6 +805,7 @@ export type Database = {
         Args: { p_features: string[]; p_school_id: string }
         Returns: undefined
       }
+      set_school_study_days: { Args: { p_days: number[] }; Returns: undefined }
       update_school_settings: {
         Args: {
           p_logo_path?: string

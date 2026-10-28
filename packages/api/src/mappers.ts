@@ -10,7 +10,7 @@ import { STORAGE_BUCKETS, type TypedSupabaseClient } from "./client";
 import type { Tables } from "./database.types";
 
 export const SCHOOL_COLUMNS =
-  "id, name, slug, status, logo_path, primary_color, secondary_color, locale, timezone, created_at" as const;
+  "id, name, slug, status, logo_path, primary_color, secondary_color, locale, timezone, study_days, created_at" as const;
 
 export const PROFILE_COLUMNS = "id, school_id, role, full_name, email, phone, is_active" as const;
 
@@ -25,6 +25,7 @@ type SchoolRow = Pick<
   | "secondary_color"
   | "locale"
   | "timezone"
+  | "study_days"
   | "created_at"
 >;
 
@@ -46,6 +47,7 @@ export function toSchool(client: TypedSupabaseClient, row: SchoolRow): School {
     status: row.status,
     locale: row.locale === "en" ? "en" : "ar",
     timezone: row.timezone,
+    studyDays: row.study_days,
     createdAt: row.created_at,
     branding: {
       name: row.name,
