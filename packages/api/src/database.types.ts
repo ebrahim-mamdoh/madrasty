@@ -1531,6 +1531,7 @@ export type Database = {
       }
     }
     Functions: {
+      admin_dashboard: { Args: never; Returns: Json }
       attendance_summary: {
         Args: { p_class_id: string; p_from: string; p_to: string }
         Returns: {
@@ -1587,6 +1588,20 @@ export type Database = {
       submit_exam: {
         Args: { p_answers: Json; p_exam_id: string }
         Returns: number
+      }
+      teacher_dashboard: { Args: never; Returns: Json }
+      teacher_monitoring: {
+        Args: never
+        Returns: {
+          attendance_days: number
+          classes: number
+          exams_unpublished: number
+          full_name: string
+          last_attendance_at: string
+          reports_pending: number
+          teacher_id: string
+          ungraded: number
+        }[]
       }
       update_school_settings: {
         Args: {

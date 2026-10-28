@@ -1,4 +1,5 @@
 import {
+  Activity,
   BookOpen,
   CalendarCheck,
   CalendarClock,
@@ -35,6 +36,7 @@ export type NavKey =
   | "grades"
   | "reports"
   | "settings"
+  | "monitoring"
   | "my_classes"
   | "my_subjects"
   | "my_grades"
@@ -103,6 +105,7 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
       permission: "reports.view",
       feature: "monthly_reports",
     },
+    { key: "monitoring", href: "/admin/monitoring", icon: Activity, permission: "monitoring.view" },
     { key: "settings", href: "/admin/settings", icon: Settings, permission: "settings.branding" },
   ],
   teacher: [

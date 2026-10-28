@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { PortalWelcome } from "@/components/shared/PortalWelcome";
-import { requirePortal } from "@/lib/auth";
+import { StudentDashboardPageClient } from "@/components/pages/StudentDashboardPageClient";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("metadata");
   return { title: t("student") };
 }
 
-export default async function StudentHomePage() {
-  const session = await requirePortal("student");
-  return <PortalWelcome session={session} subtitleKey="student_subtitle" />;
+/** The portal layout already checks the role. */
+export default function StudentHomePage() {
+  return <StudentDashboardPageClient />;
 }

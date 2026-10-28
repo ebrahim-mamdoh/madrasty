@@ -144,14 +144,57 @@
     "my_subjects": "My subjects",
     "my_grades": "My grades",
     "timetable": "Timetable",
-    "schedule": "My schedule"
+    "schedule": "My schedule",
+    "monitoring": "Teacher follow-up"
   },
   "dashboard": {
     "welcome": "Welcome, {name}",
     "admin_subtitle": "An overview of your school",
     "teacher_subtitle": "Your classes and daily tasks",
     "student_subtitle": "Your subjects, homework and grades in one place",
-    "coming_soon": "This section is under construction"
+    "coming_soon": "This section is under construction",
+    "attention": "Needs your attention",
+    "all_clear": "Nothing is waiting on you right now 👌",
+    "admin": {
+      "students": "Students this year",
+      "teachers": "Teachers",
+      "classes": "Classes",
+      "attendance_today": "Attendance today",
+      "today": "Today's attendance",
+      "status": {
+        "present": "Present",
+        "absent": "Absent",
+        "late": "Late",
+        "excused": "Excused"
+      },
+      "classes_recorded": "{recorded} of {total} classes recorded",
+      "no_study_day": "Today isn't a study day",
+      "exams_pending": "{count, plural, one {# exam awaits} other {# exams await}} your approval",
+      "attendance_missing": "{count, plural, one {# class has} other {# classes have}} no attendance today",
+      "exams_upcoming": "{count, plural, one {# exam} other {# exams}} in the next 7 days",
+      "homework_due": "{count, plural, one {# homework is} other {# homework are}} due in the next 7 days",
+      "reports_sent": "{count} monthly reports sent this month",
+      "monitoring": "Teacher follow-up"
+    },
+    "teacher": {
+      "lessons_today": "Today's lessons",
+      "no_lessons": "You have no lessons today",
+      "attendance_pending": "{className}'s attendance isn't recorded yet today",
+      "to_grade": "{count, plural, one {# answer awaits} other {# answers await}} grading",
+      "exams_to_publish": "{count, plural, one {# exam is} other {# exams are}} over with unpublished results",
+      "upcoming_exams": "Exams in the next two weeks",
+      "no_exams": "No upcoming exams"
+    },
+    "student": {
+      "attendance_rate": "My attendance",
+      "absences": "Days absent",
+      "homework_open": "Homework to do",
+      "exams_upcoming": "Upcoming exams",
+      "lessons_today": "Today's lessons",
+      "no_lessons": "No lessons today",
+      "homework_due": "Homework “{title}” — due {due}",
+      "exam_upcoming": "Exam “{title}” — {date}"
+    }
   },
   "platform": {
     "dashboard": {
@@ -228,7 +271,8 @@
     "grades": "Grades",
     "my_grades": "My grades",
     "exam_room": "Exam room",
-    "reports": "Monthly reports"
+    "reports": "Monthly reports",
+    "monitoring": "Teacher follow-up"
   },
   "structure": {
     "title": "Academic structure",
@@ -912,5 +956,18 @@
       "grade": "Your result in “{title}”: {score} of {max}",
       "monthly_report": "{student}'s monthly report for {month} has arrived"
     }
+  },
+  "monitoring": {
+    "title": "Teacher follow-up",
+    "subtitle": "How each teacher keeps up with attendance, grading, results and reports this month",
+    "teacher": "Teacher",
+    "classes_n": "{count, plural, =0 {No classes} one {# class} other {# classes}}",
+    "attendance_days": "Attendance days",
+    "last_at": "Last recorded {time}",
+    "never": "Never recorded",
+    "ungraded": "Ungraded answers",
+    "exams_unpublished": "Unpublished results",
+    "reports_pending": "Reports not sent",
+    "empty": "No active teachers"
   }
 }

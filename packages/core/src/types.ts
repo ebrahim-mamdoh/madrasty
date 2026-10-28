@@ -384,3 +384,36 @@ export type AppNotification = {
   readAt: string | null;
   createdAt: string;
 };
+
+/** Admin home (counts are what the viewer may see under RLS). */
+export type AdminDashboard = {
+  students: number;
+  teachers: number;
+  classes: number;
+  attendance: AttendanceCounts & { classesRecorded: number };
+  isStudyDay: boolean;
+  examsPending: number;
+  examsUpcoming: number;
+  homeworkDue: number;
+  reportsSent: number;
+};
+
+export type TeacherDashboard = {
+  lessonsToday: { period: number; startsAt: string; endsAt: string; className: string; subjectName: string }[];
+  attendancePending: { classId: string; className: string }[];
+  toGrade: number;
+  upcomingExams: { id: string; title: string; startsAt: string; status: ExamStatus; className: string }[];
+  examsToPublish: number;
+};
+
+/** Admin → Monitoring: one teacher's follow-up indicators for the current month. */
+export type TeacherMonitoringRow = {
+  teacherId: string;
+  fullName: string;
+  classes: number;
+  attendanceDays: number;
+  lastAttendanceAt: string | null;
+  ungraded: number;
+  examsUnpublished: number;
+  reportsPending: number;
+};

@@ -144,14 +144,57 @@
     "my_subjects": "موادي",
     "my_grades": "درجاتي",
     "timetable": "الجدول الدراسي",
-    "schedule": "جدولي"
+    "schedule": "جدولي",
+    "monitoring": "متابعة المعلمين"
   },
   "dashboard": {
     "welcome": "أهلًا، {name}",
     "admin_subtitle": "نظرة عامة على مدرستك",
     "teacher_subtitle": "فصولك ومهامك اليومية",
     "student_subtitle": "موادك وواجباتك ودرجاتك في مكان واحد",
-    "coming_soon": "هذا القسم قيد التطوير وسيتوفر قريبًا"
+    "coming_soon": "هذا القسم قيد التطوير وسيتوفر قريبًا",
+    "attention": "يحتاج انتباهك",
+    "all_clear": "لا شيء ينتظرك الآن 👌",
+    "admin": {
+      "students": "الطلاب هذا العام",
+      "teachers": "المعلمون",
+      "classes": "الفصول",
+      "attendance_today": "حضور اليوم",
+      "today": "حضور اليوم",
+      "status": {
+        "present": "حاضر",
+        "absent": "غائب",
+        "late": "متأخر",
+        "excused": "بعذر"
+      },
+      "classes_recorded": "رُصد حضور {recorded} من {total} فصل",
+      "no_study_day": "اليوم ليس يوم دراسة",
+      "exams_pending": "{count, plural, one {امتحان واحد} two {امتحانان} few {# امتحانات} many {# امتحانًا} other {# امتحان}} بانتظار اعتمادك",
+      "attendance_missing": "{count, plural, one {فصل واحد} two {فصلان} few {# فصول} many {# فصلًا} other {# فصل}} لم يُرصد حضوره اليوم",
+      "exams_upcoming": "{count, plural, one {امتحان واحد} two {امتحانان} few {# امتحانات} many {# امتحانًا} other {# امتحان}} خلال 7 أيام",
+      "homework_due": "{count, plural, one {واجب واحد} two {واجبان} few {# واجبات} many {# واجبًا} other {# واجب}} موعد تسليمه خلال 7 أيام",
+      "reports_sent": "أُرسل {count} تقرير شهري هذا الشهر",
+      "monitoring": "متابعة التزام المعلمين"
+    },
+    "teacher": {
+      "lessons_today": "حصص اليوم",
+      "no_lessons": "لا توجد حصص لك اليوم",
+      "attendance_pending": "لم يُرصد حضور {className} اليوم",
+      "to_grade": "{count, plural, one {حل واحد} two {حلان} few {# حلول} many {# حلًا} other {# حل}} بانتظار التصحيح",
+      "exams_to_publish": "{count, plural, one {امتحان واحد} two {امتحانان} few {# امتحانات} many {# امتحانًا} other {# امتحان}} انتهى ولم تُنشر نتائجه",
+      "upcoming_exams": "امتحانات خلال أسبوعين",
+      "no_exams": "لا توجد امتحانات قريبة"
+    },
+    "student": {
+      "attendance_rate": "نسبة حضوري",
+      "absences": "أيام الغياب",
+      "homework_open": "واجبات مطلوبة",
+      "exams_upcoming": "امتحانات قادمة",
+      "lessons_today": "حصص اليوم",
+      "no_lessons": "لا توجد حصص اليوم",
+      "homework_due": "واجب «{title}» — آخر موعد {due}",
+      "exam_upcoming": "امتحان «{title}» — {date}"
+    }
   },
   "platform": {
     "dashboard": {
@@ -228,7 +271,8 @@
     "grades": "الدرجات",
     "my_grades": "درجاتي",
     "exam_room": "قاعة الامتحان",
-    "reports": "التقارير الشهرية"
+    "reports": "التقارير الشهرية",
+    "monitoring": "متابعة المعلمين"
   },
   "structure": {
     "title": "الهيكل الدراسي",
@@ -912,5 +956,18 @@
       "grade": "نتيجتك في «{title}»: {score} من {max}",
       "monthly_report": "وصل التقرير الشهري لـ{student} عن {month}"
     }
+  },
+  "monitoring": {
+    "title": "متابعة المعلمين",
+    "subtitle": "مدى التزام كل معلم برصد الحضور والتصحيح ونشر النتائج والتقارير هذا الشهر",
+    "teacher": "المعلم",
+    "classes_n": "{count, plural, =0 {بلا فصول} one {فصل واحد} two {فصلان} few {# فصول} many {# فصلًا} other {# فصل}}",
+    "attendance_days": "أيام رصد الحضور",
+    "last_at": "آخر رصد {time}",
+    "never": "لم يرصد بعد",
+    "ungraded": "حلول بلا تصحيح",
+    "exams_unpublished": "نتائج لم تُنشر",
+    "reports_pending": "تقارير لم تُرسل",
+    "empty": "لا يوجد معلمون نشطون"
   }
 }
