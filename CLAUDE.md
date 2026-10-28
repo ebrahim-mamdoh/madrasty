@@ -3,6 +3,7 @@
 Multi-tenant school SaaS. Read before changing code:
 
 - `docs/MASTER_PLAN.md` — final vision of every portal, target data model, phase order, consistency checklist.
+- `docs/PROGRESS_REPORT.md` — where the project stands (done / remaining), how to run it, how to resume. Read first.
   Work through it phase by phase without waiting for approval; commit locally, push only at the end or on request.
 - `docs/PROJECT_DNA.md` — architecture, conventions, anti-patterns (source of truth for how to build).
 - Business specs (Arabic): `website-superAdmin-admin-student.md`, `supabase-backend.md`, `mopile-app.md`.
