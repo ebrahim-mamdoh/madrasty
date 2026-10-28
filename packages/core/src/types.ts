@@ -3,6 +3,7 @@ import type { PermissionKey } from "./permissions";
 import type { AppRole } from "./roles";
 import type { AttendanceCounts, AttendanceStatus } from "./schemas/attendance";
 import type { ExamKind, ExamMode, ExamStatus, QuestionType } from "./schemas/exams";
+import type { ReportCriterion, ReportStatus } from "./schemas/reports";
 
 export type SchoolStatus = "active" | "suspended";
 
@@ -343,4 +344,24 @@ export type StudentGrade = {
   score: number;
   maxScore: number;
   startsAt: string;
+};
+
+export type MonthlyReport = {
+  id: string;
+  studentId: string;
+  classId: string;
+  /** `YYYY-MM-01` */
+  month: string;
+  ratings: Partial<Record<ReportCriterion, number>>;
+  academicNote: string;
+  behaviorNote: string;
+  status: ReportStatus;
+  sentAt: string | null;
+};
+
+/** One row of a class's reports sheet for a month (report null = not started). */
+export type ReportRosterEntry = {
+  studentId: string;
+  fullName: string;
+  report: MonthlyReport | null;
 };

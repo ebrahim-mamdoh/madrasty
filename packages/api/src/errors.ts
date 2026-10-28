@@ -27,6 +27,7 @@ const POSTGRES_CODES: Record<string, [AppError["code"], string?]> = {
   MD010: ["validation", "errors.exam_not_started"], // exam room: before the start time
   MD011: ["conflict", "errors.exam_already_submitted"], // exam room: submitted already
   MD012: ["validation", "errors.exam_closed"], // exam room: after the end time
+  MD013: ["validation", "errors.invalid_rating"], // reports: rating outside 1–5
   PGRST116: ["not_found"], // .single() returned no rows (also: RLS hid the row)
   PGRST301: ["unauthenticated"], // JWT expired / invalid
 };

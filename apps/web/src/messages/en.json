@@ -108,7 +108,8 @@
     "reason_required": "Write the reason for rejecting",
     "exam_not_started": "The exam hasn't started yet",
     "exam_already_submitted": "You already submitted this exam",
-    "exam_closed": "The exam time is over"
+    "exam_closed": "The exam time is over",
+    "invalid_rating": "Ratings must be between 1 and 5"
   },
   "auth": {
     "title": "Sign in",
@@ -226,7 +227,8 @@
     "exams": "Exams",
     "grades": "Grades",
     "my_grades": "My grades",
-    "exam_room": "Exam room"
+    "exam_room": "Exam room",
+    "reports": "Monthly reports"
   },
   "structure": {
     "title": "Academic structure",
@@ -849,5 +851,47 @@
       "submitted_title": "Exam submitted",
       "submitted_hint": "Your score will appear once the teacher reviews and publishes the results."
     }
+  },
+  "reports": {
+    "title": "Monthly reports",
+    "teacher_subtitle": "Write each student's report in your classes and send it to their parents in one click",
+    "admin_subtitle": "Review each class's monthly reports and send them to parents",
+    "class": "Class",
+    "month": "Month",
+    "student": "Student",
+    "attendance_rate": "Attendance",
+    "status_label": "Status",
+    "status": {
+      "none": "Not written",
+      "draft": "Draft",
+      "sent": "Sent"
+    },
+    "progress": "{drafts} drafts · {sent} sent · of {total} students",
+    "write": "Write report",
+    "view": "View report",
+    "select": "Select {name}'s report",
+    "send": "Send",
+    "send_all": "Send all drafts ({n})",
+    "send_selected": "Send selected ({n})",
+    "send_title": "Send reports to parents?",
+    "send_description": "{n} reports will be sent and every parent and student notified. Sent reports can't be edited.",
+    "sent_n": "{n} reports sent",
+    "ratings": "Ratings",
+    "criteria": {
+      "participation": "Participation",
+      "behavior": "Behaviour",
+      "homework": "Homework",
+      "discipline": "Discipline"
+    },
+    "rating_n": "{n} of 5",
+    "academic_note": "Academic notes",
+    "academic_placeholder": "Level, strengths and what to improve",
+    "behavior_note": "Behaviour notes",
+    "behavior_placeholder": "Conduct and attitude in class",
+    "save_draft": "Save draft",
+    "draft_hint": "Saved as a draft until you send it",
+    "sent_locked": "This report was sent and can't be edited",
+    "no_students": "No students in this class",
+    "no_classes": "No classes available"
   }
 }

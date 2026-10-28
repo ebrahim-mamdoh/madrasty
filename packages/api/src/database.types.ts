@@ -766,6 +766,100 @@ export type Database = {
           },
         ]
       }
+      monthly_reports: {
+        Row: {
+          academic_note: string
+          author_id: string | null
+          behavior_note: string
+          class_id: string
+          created_at: string
+          id: string
+          month: string
+          ratings: Json
+          school_id: string
+          sent_at: string | null
+          sent_by: string | null
+          status: Database["public"]["Enums"]["report_status"]
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          academic_note?: string
+          author_id?: string | null
+          behavior_note?: string
+          class_id: string
+          created_at?: string
+          id?: string
+          month: string
+          ratings?: Json
+          school_id: string
+          sent_at?: string | null
+          sent_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          academic_note?: string
+          author_id?: string | null
+          behavior_note?: string
+          class_id?: string
+          created_at?: string
+          id?: string
+          month?: string
+          ratings?: Json
+          school_id?: string
+          sent_at?: string | null
+          sent_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "monthly_reports_author_id_school_id_fkey"
+            columns: ["author_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "monthly_reports_class_fkey"
+            columns: ["class_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "monthly_reports_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "monthly_reports_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "monthly_reports_sent_by_school_id_fkey"
+            columns: ["sent_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "monthly_reports_student_id_school_id_fkey"
+            columns: ["student_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string
@@ -1479,6 +1573,7 @@ export type Database = {
           teachers_total: number
         }[]
       }
+      send_monthly_reports: { Args: { p_ids: string[] }; Returns: number }
       set_current_academic_year: {
         Args: { p_year_id: string }
         Returns: undefined
@@ -1518,6 +1613,7 @@ export type Database = {
       exam_mode: "paper" | "online"
       exam_status: "draft" | "pending" | "approved" | "published"
       question_type: "mcq" | "true_false" | "short"
+      report_status: "draft" | "sent"
       school_status: "active" | "suspended"
     }
     CompositeTypes: {
@@ -1659,6 +1755,7 @@ export const Constants = {
       exam_mode: ["paper", "online"],
       exam_status: ["draft", "pending", "approved", "published"],
       question_type: ["mcq", "true_false", "short"],
+      report_status: ["draft", "sent"],
       school_status: ["active", "suspended"],
     },
   },
