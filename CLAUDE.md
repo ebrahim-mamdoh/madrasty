@@ -19,6 +19,10 @@ Multi-tenant school SaaS. Read before changing code:
 - Every schema change is a new migration file; every new table gets RLS + policies + a pgTAP test.
 - Every user-visible string goes in `apps/web/src/messages/{ar,en}.json`. Arabic/RTL first.
 - Server actions authorize on the server and validate input with the shared zod schema.
+- Account changes (create, activate, password) go through `actions/people.ts` + `@madrasty/api/admin`;
+  never log their arguments (`logging.serverFunctions` stays `false` in `next.config.ts`).
+- New migrations: `npx supabase migration new <name>`, but the version must sort after the newest one on
+  the remote (`npx supabase migration list --linked`) — rename the file if the clock is behind it.
 - Add a dependency to one workspace only: `npm install <pkg> -w @madrasty/web` (never at the root unless it's tooling).
 - After `npx shadcn add …` (run in `apps/web`, answer "n" to overwrite prompts): the CLI rewrites imports to
   `from "cn"` and installs an unrelated npm package `cn`. Replace with `from "@/lib/utils"` and `npm uninstall cn -w @madrasty/web`.

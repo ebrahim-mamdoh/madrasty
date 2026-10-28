@@ -22,6 +22,8 @@ export function createAdminServices(adminClient: TypedSupabaseClient) {
       fullName: string;
       role: SchoolRole;
       schoolId: string;
+      /** Contact phone shown in the school; not used for sign-in. */
+      phone?: string;
     }): Promise<string> {
       const { data, error } = await adminClient.auth.admin.createUser({
         email: input.email,
@@ -32,7 +34,43 @@ export function createAdminServices(adminClient: TypedSupabaseClient) {
         user_metadata: { full_name: input.fullName },
       });
       if (error || !data.user) throw toAppError(error);
+
+      if (input.phone) {
+        const { error: phoneError } = await adminClient
+          .from("profiles")
+          .update({ phone: input.phone })
+          .eq("id", data.user.id);
+        if (phoneError) throw toAppError(phoneError);
+      }
       return data.user.id;
+    },
+
+    /**
+     * Activation lives on the profile (checked by the access-token hook on every sign-in and
+     * refresh) and is mirrored as an Auth ban so existing refresh tokens stop working at once.
+     */
+    async setActive(userId: string, active: boolean): Promise<void> {
+      const { error } = await adminClient
+        .from("profiles")
+        .update({ is_active: active })
+        .eq("id", userId);
+      if (error) throw toAppError(error);
+
+      const { error: banError } = await adminClient.auth.admin.updateUserById(userId, {
+        ban_duration: active ? "none" : "876000h",
+      });
+      if (banError) throw toAppError(banError);
+    },
+
+    async setPassword(userId: string, password: string): Promise<void> {
+      const { error } = await adminClient.auth.admin.updateUserById(userId, { password });
+      if (error) throw toAppError(error);
+    },
+
+    /** Only used to roll back a half-created account. */
+    async remove(userId: string): Promise<void> {
+      const { error } = await adminClient.auth.admin.deleteUser(userId);
+      if (error) throw toAppError(error);
     },
   };
 

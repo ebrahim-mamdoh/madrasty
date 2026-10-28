@@ -1,0 +1,14 @@
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { PeoplePageClient } from "@/components/pages/PeoplePageClient";
+import { requirePermission } from "@/lib/auth";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+  return { title: t("parents") };
+}
+
+export default async function ParentsPage() {
+  await requirePermission("parents.view");
+  return <PeoplePageClient role="parent" />;
+}

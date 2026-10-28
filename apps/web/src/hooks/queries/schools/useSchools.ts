@@ -1,9 +1,10 @@
 "use client";
 
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { AppError, type CreateSchoolInput, type SchoolStatus } from "@madrasty/core";
+import type { CreateSchoolInput, SchoolStatus } from "@madrasty/core";
 import type { SchoolsListParams } from "@madrasty/api";
 import { createSchoolAction } from "@/actions/schools";
+import { unwrapAction } from "@/lib/action-result";
 import { getBrowserServices } from "@/lib/services.client";
 
 export const schoolsQueryKey = ["schools"] as const;
@@ -30,13 +31,7 @@ export function useCreateSchool() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (input: CreateSchoolInput) => {
-      const result = await createSchoolAction(input);
-      if (!result.ok) {
-        throw new AppError(result.error.code, result.error.message, result.error.fieldErrors);
-      }
-      return result.data;
-    },
+    mutationFn: (input: CreateSchoolInput) => unwrapAction(createSchoolAction(input)),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: schoolsQueryKey }),
   });
 }

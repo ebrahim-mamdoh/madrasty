@@ -34,7 +34,12 @@ export function toAppError(error: unknown): AppError {
   const e = (error ?? {}) as BackendError;
 
   if (e.name === "AuthApiError" || e.name === "AuthWeakPasswordError") {
-    if (e.message === "account_disabled" || e.code === "account_disabled") {
+    // Deactivation shows up as our hook's refusal or as GoTrue's ban (see admin users.setActive).
+    if (
+      e.message === "account_disabled" ||
+      e.code === "account_disabled" ||
+      e.code === "user_banned"
+    ) {
       return new AppError("forbidden", "errors.account_disabled");
     }
     const key = e.code ? AUTH_MESSAGES[e.code] : undefined;

@@ -76,10 +76,35 @@ export type SchoolClass = {
   studentsCount: number;
 };
 
+/** A row in the teachers / students / parents lists. */
+export type PersonListItem = {
+  id: string;
+  fullName: string;
+  email: string | null;
+  phone: string | null;
+  isActive: boolean;
+  createdAt: string;
+  /** Students: their class in the current academic year. */
+  currentClass?: { id: string; name: string } | null;
+  /** Students: linked parents. Parents: linked children. */
+  links?: { id: string; fullName: string }[];
+};
+
 /** Minimal person reference for pickers (e.g. choosing a homeroom teacher). */
 export type PersonOption = {
   id: string;
   fullName: string;
+  /** Extra context to tell people apart in a picker (e.g. a student's class). */
+  detail?: string;
+};
+
+/** What a server action needs to authorize work on someone else's account. */
+export type PersonRef = {
+  id: string;
+  schoolId: string | null;
+  role: AppRole;
+  fullName: string;
+  isActive: boolean;
 };
 
 export type PlatformStats = {

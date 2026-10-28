@@ -59,7 +59,8 @@
     "date": "Enter a valid date",
     "end_after_start": "End date must be after the start date",
     "code_max": "Code must be at most 20 characters",
-    "code_format": "Letters, digits and dashes only"
+    "code_format": "Letters, digits and dashes only",
+    "phone": "Invalid phone number"
   },
   "errors": {
     "unauthenticated": "Your session expired, please sign in again",
@@ -164,7 +165,10 @@
     "admin": "School admin",
     "teacher": "Teacher workspace",
     "student": "Student portal",
-    "structure": "Academic structure"
+    "structure": "Academic structure",
+    "teachers": "Teachers",
+    "students": "Students",
+    "parents": "Parents"
   },
   "structure": {
     "title": "Academic structure",
@@ -242,5 +246,69 @@
       "delete_description": "“{name}” will be permanently deleted.",
       "in_use": "A class with enrolled students can't be deleted"
     }
+  },
+  "people": {
+    "fields": {
+      "full_name": "Full name",
+      "email": "Email",
+      "email_hint": "Used to sign in; it can't be changed later",
+      "phone": "Phone",
+      "phone_hint": "Optional",
+      "password": "Temporary password",
+      "password_hint": "Copy it and share it with the account owner",
+      "status": "Status"
+    },
+    "generate": "Generate",
+    "copy": "Copy",
+    "copied": "Copied",
+    "active": "Active",
+    "inactive": "Deactivated",
+    "activate": "Activate account",
+    "deactivate": "Deactivate account",
+    "activated": "Account activated",
+    "deactivated": "Account deactivated",
+    "deactivate_title": "Deactivate {name}?",
+    "deactivate_description": "They won't be able to sign in until you reactivate them. No data is deleted.",
+    "reset_password": "Reset password",
+    "reset_title": "New password",
+    "reset_description": "{name}'s current password will be replaced. Copy the new one and share it.",
+    "reset_done": "Password changed",
+    "created": "Account created",
+    "search_placeholder": "Search by name…",
+    "teachers": {
+      "title": "Teachers",
+      "subtitle": "Teacher accounts in your school",
+      "add": "Add teacher",
+      "create_title": "New teacher",
+      "edit_title": "Edit teacher",
+      "empty": "No teachers yet"
+    },
+    "students": {
+      "title": "Students",
+      "subtitle": "Student accounts and their classes this year",
+      "add": "Add student",
+      "create_title": "New student",
+      "edit_title": "Edit student",
+      "empty": "No students yet",
+      "class": "Class",
+      "no_class": "No class",
+      "all_classes": "All classes",
+      "parents": "Parents",
+      "no_current_year": "Set a current academic year in “Academic structure” to place students in classes"
+    },
+    "parents": {
+      "title": "Parents",
+      "subtitle": "Parent accounts and their children",
+      "add": "Add parent",
+      "create_title": "New parent",
+      "edit_title": "Edit parent",
+      "empty": "No parents yet",
+      "children": "Children",
+      "children_hint": "Choose their children enrolled in the school",
+      "search_students": "Search students…",
+      "no_students": "No matching students",
+      "selected_count": "{count, plural, =0 {None selected} one {1 student} other {# students}}"
+    },
+    "empty_search": "No matching results"
   }
 }

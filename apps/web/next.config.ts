@@ -36,6 +36,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   transpilePackages: ["@madrasty/core", "@madrasty/api"],
+  logging: {
+    // Server Function logging prints call arguments — that includes passwords from account
+    // forms. Never let credentials reach logs.
+    serverFunctions: false,
+  },
   images: {
     remotePatterns: [
       {

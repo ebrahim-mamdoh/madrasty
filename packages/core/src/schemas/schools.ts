@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { HEX_COLOR_REGEX } from "../branding";
 import { FEATURE_KEYS } from "../features";
-import { passwordSchema } from "./auth";
+import { emailSchema, passwordSchema } from "./auth";
 
 export const schoolSlugSchema = z
   .string()
@@ -25,7 +25,7 @@ export const createSchoolSchema = z.object({
   features: z.array(z.enum(FEATURE_KEYS)),
   admin: z.object({
     fullName: z.string().trim().min(2, "validation.name_min").max(120, "validation.name_max"),
-    email: z.email("validation.email").trim().toLowerCase(),
+    email: emailSchema,
     password: passwordSchema,
   }),
 });

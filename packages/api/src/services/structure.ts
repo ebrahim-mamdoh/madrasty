@@ -274,6 +274,14 @@ export function createStructureService(client: TypedSupabaseClient) {
       });
     },
 
+    /** The academic year a class belongs to (enrollments are per year). */
+    async getClassYearId(classId: string): Promise<string> {
+      const { academic_year_id } = unwrap(
+        await client.from("classes").select("academic_year_id").eq("id", classId).single(),
+      );
+      return academic_year_id;
+    },
+
     async deleteClass(id: string): Promise<void> {
       expectAffected(unwrap(await client.from("classes").delete().eq("id", id).select("id")));
     },

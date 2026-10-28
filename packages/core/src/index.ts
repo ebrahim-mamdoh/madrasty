@@ -7,4 +7,5 @@ export * from "./roles";
 export * from "./types";
 export * from "./schemas/auth";
 export * from "./schemas/schools";
+export * from "./schemas/people";
 export * from "./schemas/structure";

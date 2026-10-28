@@ -4,8 +4,14 @@ import { z } from "zod";
  * Messages are i18n keys resolved by the UI (`t(issue.message)`), so the same schema
  * works on web and mobile without passing a translator in.
  */
+/**
+ * Trim + lowercase BEFORE validating: `z.email().trim()` checks the format first,
+ * so a pasted address with a trailing space would be rejected.
+ */
+export const emailSchema = z.string().trim().toLowerCase().pipe(z.email("validation.email"));
+
 export const loginSchema = z.object({
-  email: z.email("validation.email").trim().toLowerCase(),
+  email: emailSchema,
   password: z.string().min(1, "validation.required"),
 });
 
