@@ -49,7 +49,7 @@ npm run db:types     # regenerates typed DB definitions
    Postgres function `public.custom_access_token_hook`.
    _Without it, nobody has a role in their token and every portal is empty._
 2. **Authentication → Sign In / Providers → Email** → turn **off** "Allow new users to sign up".
-3. **Authentication → Policies (password)** → minimum length 10, require letters and digits.
+3. **Authentication → Policies (password)** → minimum length 8, require letters and digits.
 4. **Project Settings → JWT Keys** → make sure an asymmetric signing key (ECC/RSA) is active so
    `getClaims()` verifies tokens locally instead of a network call.
 
