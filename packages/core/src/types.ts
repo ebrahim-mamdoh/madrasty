@@ -74,6 +74,25 @@ export type SchoolClass = {
   gradeLevel: { id: string; name: string };
   homeroomTeacher: { id: string; fullName: string } | null;
   studentsCount: number;
+  subjectsCount: number;
+};
+
+/** A subject taught in a class, and who teaches it. */
+export type ClassSubject = {
+  id: string;
+  subject: { id: string; name: string };
+  teacher: { id: string; fullName: string } | null;
+};
+
+/** A class as seen from a teacher's workspace (current academic year). */
+export type TeacherClass = {
+  id: string;
+  name: string;
+  gradeLevelName: string;
+  studentsCount: number;
+  /** Subjects this teacher teaches in the class (may be empty for a homeroom-only class). */
+  subjects: string[];
+  isHomeroom: boolean;
 };
 
 /** A row in the teachers / students / parents lists. */

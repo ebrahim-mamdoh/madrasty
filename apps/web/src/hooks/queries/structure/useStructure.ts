@@ -134,3 +134,33 @@ export function useSaveClass() {
 export function useDeleteClass() {
   return useStructureMutation((service, _schoolId, id: string) => service.deleteClass(id));
 }
+
+// --------------------------------------------------------- class subjects
+export const classSubjectsQueryKey = (classId: string) =>
+  [...structureQueryKey, "class-subjects", classId] as const;
+
+export function useClassSubjects(classId: string | undefined) {
+  return useQuery({
+    queryKey: classSubjectsQueryKey(classId ?? ""),
+    queryFn: () => structure().listClassSubjects(classId!),
+    enabled: Boolean(classId),
+  });
+}
+
+export function useAddClassSubjects() {
+  return useStructureMutation(
+    (service, schoolId, { classId, subjectIds }: { classId: string; subjectIds: string[] }) =>
+      service.addClassSubjects(schoolId, classId, subjectIds),
+  );
+}
+
+export function useSetClassSubjectTeacher() {
+  return useStructureMutation(
+    (service, _schoolId, { id, teacherId }: { id: string; teacherId: string | null }) =>
+      service.setClassSubjectTeacher(id, teacherId),
+  );
+}
+
+export function useRemoveClassSubject() {
+  return useStructureMutation((service, _schoolId, id: string) => service.removeClassSubject(id));
+}

@@ -2,6 +2,7 @@ import {
   AppError,
   type AcademicYear,
   type AcademicYearInput,
+  type ClassSubject,
   type GradeLevel,
   type GradeLevelInput,
   type PersonOption,
@@ -216,7 +217,8 @@ export function createStructureService(client: TypedSupabaseClient) {
             `id, name, academic_year_id,
              grade_level:grade_levels(id, name, sort_order),
              homeroom:profiles(id, full_name),
-             student_enrollments!student_enrollments_class_id_school_id_fkey(count)`,
+             student_enrollments!student_enrollments_class_id_school_id_fkey(count),
+             class_subjects(count)`,
           )
           .eq("academic_year_id", academicYearId),
       );
@@ -231,6 +233,7 @@ export function createStructureService(client: TypedSupabaseClient) {
             ? { id: row.homeroom.id, fullName: row.homeroom.full_name }
             : null,
           studentsCount: countOf(row.student_enrollments),
+          subjectsCount: countOf(row.class_subjects),
           sortKey: row.grade_level.sort_order,
         }))
         .sort((a, b) => a.sortKey - b.sortKey || a.name.localeCompare(b.name, "ar"))
@@ -272,6 +275,57 @@ export function createStructureService(client: TypedSupabaseClient) {
           ),
         );
       });
+    },
+
+    // ----------------------------------------------------- class subjects
+    /** Subjects taught in a class and who teaches each one. */
+    async listClassSubjects(classId: string): Promise<ClassSubject[]> {
+      const rows = unwrap(
+        await client
+          .from("class_subjects")
+          .select("id, subject:subjects(id, name), teacher:profiles(id, full_name)")
+          .eq("class_id", classId),
+      );
+      return rows
+        .map((row) => ({
+          id: row.id,
+          subject: { id: row.subject.id, name: row.subject.name },
+          teacher: row.teacher ? { id: row.teacher.id, fullName: row.teacher.full_name } : null,
+        }))
+        .sort((a, b) => a.subject.name.localeCompare(b.subject.name, "ar"));
+    },
+
+    async addClassSubjects(schoolId: string, classId: string, subjectIds: string[]): Promise<void> {
+      if (subjectIds.length === 0) return;
+      unwrap(
+        await client.from("class_subjects").upsert(
+          subjectIds.map((subjectId) => ({
+            school_id: schoolId,
+            class_id: classId,
+            subject_id: subjectId,
+          })),
+          // Adding a subject the class already has is a no-op, not an error.
+          { onConflict: "class_id,subject_id", ignoreDuplicates: true },
+        ),
+      );
+    },
+
+    async setClassSubjectTeacher(classSubjectId: string, teacherId: string | null): Promise<void> {
+      expectAffected(
+        unwrap(
+          await client
+            .from("class_subjects")
+            .update({ teacher_id: teacherId })
+            .eq("id", classSubjectId)
+            .select("id"),
+        ),
+      );
+    },
+
+    async removeClassSubject(classSubjectId: string): Promise<void> {
+      expectAffected(
+        unwrap(await client.from("class_subjects").delete().eq("id", classSubjectId).select("id")),
+      );
     },
 
     /** The academic year a class belongs to (enrollments are per year). */

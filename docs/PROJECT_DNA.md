@@ -214,5 +214,6 @@ proxy.ts     ← session refresh + i18n + auth redirect
 | Hex colors / hardcoded strings in TSX | Tokens / message keys |
 | `ml-*`, `pr-*`, `left-*` for layout | `ms-*`, `pe-*`, `start-*` |
 | `useQuery` directly in a component | Named hook in `hooks/queries/` |
-| Editing `components/ui/*` | Wrap or compose in `components/shared/` |
+| Editing `components/ui/*` | Wrap or compose in `components/shared/` (e.g. `AppDialogContent` replaces `DialogContent`). The only local patch: `sidebar.tsx` `mobileTitle` prop (shadcn hardcodes an English sr-only title) — re-apply it if the file is regenerated |
+| `DialogContent` directly | `AppDialogContent` (localized close button, RTL-safe position) |
 | Schema changes in the dashboard | A new migration file |

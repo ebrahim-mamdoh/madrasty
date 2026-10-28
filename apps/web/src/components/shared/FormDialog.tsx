@@ -3,10 +3,10 @@
 import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
+import { AppDialogContent } from "@/components/shared/AppDialogContent";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -43,7 +43,7 @@ export function FormDialog({
 
   return (
     <Dialog open={open} onOpenChange={(next) => !isPending && onOpenChange(next)}>
-      <DialogContent className={cn("max-h-[90dvh] overflow-y-auto sm:max-w-lg", className)}>
+      <AppDialogContent className={cn("max-h-[90dvh] overflow-y-auto sm:max-w-lg", className)}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
@@ -58,7 +58,7 @@ export function FormDialog({
             {submitLabel ?? t("save")}
           </Button>
         </DialogFooter>
-      </DialogContent>
+      </AppDialogContent>
     </Dialog>
   );
 }

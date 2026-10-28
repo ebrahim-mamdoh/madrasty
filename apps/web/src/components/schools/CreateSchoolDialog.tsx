@@ -7,11 +7,11 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FEATURE_KEYS, createSchoolSchema, type CreateSchoolInput } from "@madrasty/core";
 import { TextField } from "@/components/shared/form/TextField";
+import { AppDialogContent } from "@/components/shared/AppDialogContent";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -76,7 +76,7 @@ export function CreateSchoolDialog() {
           {t("create")}
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-xl">
+      <AppDialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-xl">
         <DialogHeader>
           <DialogTitle>{t("create_title")}</DialogTitle>
           <DialogDescription>{t("create_description")}</DialogDescription>
@@ -168,7 +168,7 @@ export function CreateSchoolDialog() {
             {tc("create")}
           </Button>
         </DialogFooter>
-      </DialogContent>
+      </AppDialogContent>
     </Dialog>
   );
 }

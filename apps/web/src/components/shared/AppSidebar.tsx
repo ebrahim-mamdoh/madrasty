@@ -42,7 +42,11 @@ export function AppSidebar({ portal }: AppSidebarProps) {
   const portalHome = NAVIGATION[portal][0]?.href ?? "/";
 
   return (
-    <Sidebar side={isRtl ? "right" : "left"} collapsible="icon">
+    <Sidebar
+      side={isRtl ? "right" : "left"}
+      collapsible="icon"
+      mobileTitle={t(`portals.${portal}`)}
+    >
       <SidebarHeader className="border-b border-sidebar-border p-3">
         <BrandMark
           name={school?.branding.name ?? t("common.app_name")}

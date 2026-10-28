@@ -32,6 +32,7 @@ export const baseConfig = tseslint.config(
           includeTypes: true,
         },
       ],
+      "import-x/no-duplicates": ["error", { "prefer-inline": true }],
     },
   },
   prettier,

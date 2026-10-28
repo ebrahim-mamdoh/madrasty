@@ -1,13 +1,15 @@
 "use client";
 
-import { DoorOpen, Pencil, Plus, Trash2 } from "lucide-react";
+import { BookOpen, DoorOpen, Pencil, Plus, Trash2 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import { useState } from "react";
 import type { SchoolClass } from "@madrasty/core";
 import { ConfirmDialog } from "@/components/shared/ConfirmDialog";
 import { EmptyState } from "@/components/shared/EmptyState";
 import { EntityTable, type EntityColumn } from "@/components/shared/EntityTable";
 import { IconAction } from "@/components/shared/IconAction";
 import { ClassFormDialog } from "@/components/structure/ClassFormDialog";
+import { ClassSubjectsDialog } from "@/components/structure/ClassSubjectsDialog";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -21,6 +23,7 @@ import {
   useClasses,
   useDeleteClass,
   useGradeLevels,
+  useSubjects,
   useTeacherOptions,
 } from "@/hooks/queries/structure/useStructure";
 import { useCrudDialogs } from "@/hooks/useCrudDialogs";
@@ -50,8 +53,10 @@ export function ClassesPanel() {
     yearList[0]?.id;
 
   const classes = useClasses(yearId);
+  const subjects = useSubjects();
   const remove = useDeleteClass();
   const dialogs = useCrudDialogs<SchoolClass>();
+  const [subjectsFor, setSubjectsFor] = useState<SchoolClass | null>(null);
 
   const columns: EntityColumn<SchoolClass>[] = [
     {
@@ -65,6 +70,12 @@ export function ClassesPanel() {
       header: t("homeroom"),
       cell: (schoolClass) =>
         schoolClass.homeroomTeacher?.fullName ?? <span className="text-muted-foreground">—</span>,
+    },
+    {
+      key: "subjects",
+      header: t("subjects"),
+      cell: (schoolClass) => format.number(schoolClass.subjectsCount),
+      className: "text-end tabular-nums",
     },
     {
       key: "students",
@@ -136,28 +147,43 @@ export function ClassesPanel() {
           rowKey={(schoolClass) => schoolClass.id}
           isLoading={classes.isLoading || years.isLoading}
           actionsLabel={tc("actions")}
-          actions={
-            canManage
-              ? (schoolClass) => (
-                  <>
-                    <IconAction
-                      icon={Pencil}
-                      label={tc("edit")}
-                      onClick={() => dialogs.openEdit(schoolClass)}
-                    />
-                    <IconAction
-                      icon={Trash2}
-                      label={schoolClass.studentsCount > 0 ? t("in_use") : tc("delete")}
-                      destructive
-                      disabled={schoolClass.studentsCount > 0}
-                      onClick={() => dialogs.askDelete(schoolClass)}
-                    />
-                  </>
-                )
-              : undefined
-          }
+          actions={(schoolClass) => (
+            <>
+              {/* Everyone with structure.view may see a class's subjects; only managers edit. */}
+              <IconAction
+                icon={BookOpen}
+                label={t("manage_subjects")}
+                onClick={() => setSubjectsFor(schoolClass)}
+              />
+              {canManage && (
+                <>
+                  <IconAction
+                    icon={Pencil}
+                    label={tc("edit")}
+                    onClick={() => dialogs.openEdit(schoolClass)}
+                  />
+                  <IconAction
+                    icon={Trash2}
+                    label={schoolClass.studentsCount > 0 ? t("in_use") : tc("delete")}
+                    destructive
+                    disabled={schoolClass.studentsCount > 0}
+                    onClick={() => dialogs.askDelete(schoolClass)}
+                  />
+                </>
+              )}
+            </>
+          )}
         />
       )}
+
+      <ClassSubjectsDialog
+        key={subjectsFor?.id ?? "none"}
+        schoolClass={subjectsFor}
+        onOpenChange={(open) => !open && setSubjectsFor(null)}
+        subjects={subjects.data ?? []}
+        teachers={teachers.data ?? []}
+        canManage={canManage}
+      />
 
       {yearId && (
         <ClassFormDialog

@@ -20,7 +20,8 @@
     "delete": "Delete",
     "saved": "Saved",
     "deleted": "Deleted",
-    "add": "Add"
+    "add": "Add",
+    "close": "Close"
   },
   "status": {
     "active": "Active",
@@ -168,7 +169,8 @@
     "structure": "Academic structure",
     "teachers": "Teachers",
     "students": "Students",
-    "parents": "Parents"
+    "parents": "Parents",
+    "my_classes": "My classes"
   },
   "structure": {
     "title": "Academic structure",
@@ -244,7 +246,24 @@
       "need_grades": "Add at least one grade level from the “Grade levels” tab before creating classes",
       "delete_title": "Delete class?",
       "delete_description": "“{name}” will be permanently deleted.",
-      "in_use": "A class with enrolled students can't be deleted"
+      "in_use": "A class with enrolled students can't be deleted",
+      "subjects": "Subjects",
+      "manage_subjects": "Subjects & teachers",
+      "subjects_title": "Subjects of {name}",
+      "subjects_description": "Add the subjects taught in this class and choose each subject's teacher. Changes save immediately.",
+      "subject": "Subject",
+      "teacher": "Teacher",
+      "no_teacher": "Not assigned",
+      "add_subject": "Add",
+      "add_subject_placeholder": "Choose a subject to add",
+      "add_all": "Add all subjects",
+      "remove_subject": "Remove subject from class",
+      "no_subjects": "No subjects in this class yet",
+      "all_added": "All school subjects are already in this class",
+      "need_subjects": "Add subjects first from the “Subjects” tab",
+      "teacher_updated": "Subject teacher updated",
+      "subject_added": "Subjects added",
+      "subject_removed": "Subject removed"
     }
   },
   "people": {
@@ -310,5 +329,16 @@
       "selected_count": "{count, plural, =0 {None selected} one {1 student} other {# students}}"
     },
     "empty_search": "No matching results"
+  },
+  "teacher": {
+    "classes": {
+      "title": "My classes",
+      "subtitle": "Classes you teach this academic year",
+      "empty": "No classes assigned to you yet",
+      "empty_hint": "Your classes appear here once the school assigns subjects to teachers",
+      "homeroom": "Homeroom",
+      "homeroom_only": "Homeroom only",
+      "students": "{count, plural, =0 {No students} one {1 student} other {# students}}"
+    }
   }
 }
