@@ -7,14 +7,16 @@ type BackendError = {
   name?: string;
 };
 
-const POSTGRES_CODES: Record<string, AppError["code"]> = {
-  "42501": "forbidden", // insufficient_privilege / RLS violation
-  "23505": "conflict", // unique_violation
-  "23503": "validation", // foreign_key_violation
-  "23514": "validation", // check_violation
-  "22P02": "validation", // invalid_text_representation (bad uuid…)
-  PGRST116: "not_found", // .single() returned no rows
-  PGRST301: "unauthenticated", // JWT expired / invalid
+/** Postgres/PostgREST code → [AppError code, i18n message key]. */
+const POSTGRES_CODES: Record<string, [AppError["code"], string?]> = {
+  "42501": ["forbidden"], // insufficient_privilege / RLS violation
+  "23505": ["conflict"], // unique_violation
+  "23503": ["conflict", "errors.in_use"], // foreign_key_violation: row still referenced
+  "23514": ["validation"], // check_violation
+  "22P02": ["validation"], // invalid_text_representation (bad uuid…)
+  P0002: ["not_found"], // raised by RPCs for unknown ids
+  PGRST116: ["not_found"], // .single() returned no rows (also: RLS hid the row)
+  PGRST301: ["unauthenticated"], // JWT expired / invalid
 };
 
 const AUTH_MESSAGES: Record<string, string> = {
@@ -42,8 +44,9 @@ export function toAppError(error: unknown): AppError {
     if (e.status === 403) return new AppError("forbidden");
   }
 
-  if (e.code && POSTGRES_CODES[e.code]) {
-    return new AppError(POSTGRES_CODES[e.code]!);
+  const mapped = e.code ? POSTGRES_CODES[e.code] : undefined;
+  if (mapped) {
+    return new AppError(mapped[0], mapped[1]);
   }
 
   if (e.name === "AuthRetryableFetchError" || e.message?.includes("fetch")) {

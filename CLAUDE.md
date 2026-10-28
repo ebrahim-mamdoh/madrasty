@@ -20,3 +20,5 @@ Multi-tenant school SaaS. Read before changing code:
 - Every user-visible string goes in `apps/web/src/messages/{ar,en}.json`. Arabic/RTL first.
 - Server actions authorize on the server and validate input with the shared zod schema.
 - Add a dependency to one workspace only: `npm install <pkg> -w @madrasty/web` (never at the root unless it's tooling).
+- After `npx shadcn add …` (run in `apps/web`, answer "n" to overwrite prompts): the CLI rewrites imports to
+  `from "cn"` and installs an unrelated npm package `cn`. Replace with `from "@/lib/utils"` and `npm uninstall cn -w @madrasty/web`.

@@ -4,13 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Controller, useForm, type FieldPath } from "react-hook-form";
-import {
-  FEATURE_KEYS,
-  createSchoolSchema,
-  isAppError,
-  type CreateSchoolInput,
-} from "@madrasty/core";
+import { Controller, useForm } from "react-hook-form";
+import { FEATURE_KEYS, createSchoolSchema, type CreateSchoolInput } from "@madrasty/core";
 import { TextField } from "@/components/shared/form/TextField";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -33,6 +28,7 @@ import {
 } from "@/components/ui/field";
 import { useCreateSchool } from "@/hooks/queries/schools/useSchools";
 import { useErrorMessage } from "@/hooks/useErrorMessage";
+import { applyFieldErrors, hasFieldErrors } from "@/lib/forms";
 import { notifySuccess } from "@/lib/utils";
 
 const DEFAULT_VALUES: CreateSchoolInput = {
@@ -62,14 +58,7 @@ export function CreateSchoolDialog() {
         form.reset(DEFAULT_VALUES);
         setOpen(false);
       },
-      onError: (error) => {
-        // Map server-side field errors back onto the form.
-        if (isAppError(error) && error.fieldErrors) {
-          for (const [path, message] of Object.entries(error.fieldErrors)) {
-            form.setError(path as FieldPath<CreateSchoolInput>, { message }, { shouldFocus: true });
-          }
-        }
-      },
+      onError: (error) => applyFieldErrors(form.setError, error),
     }),
   );
 
@@ -164,10 +153,9 @@ export function CreateSchoolDialog() {
             </FieldSet>
 
             {/* Field-level errors are shown on their inputs; this is for everything else. */}
-            {createSchool.isError &&
-              !(isAppError(createSchool.error) && createSchool.error.fieldErrors) && (
-                <FieldError>{toMessage(createSchool.error)}</FieldError>
-              )}
+            {createSchool.isError && !hasFieldErrors(createSchool.error) && (
+              <FieldError>{toMessage(createSchool.error)}</FieldError>
+            )}
           </FieldGroup>
         </form>
 

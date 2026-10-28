@@ -77,7 +77,8 @@ export function AppSidebar({ portal }: AppSidebarProps) {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarRail />
+      {/* shadcn's default label is hardcoded English; props override it. */}
+      <SidebarRail aria-label={t("common.toggle_sidebar")} title={t("common.toggle_sidebar")} />
     </Sidebar>
   );
 }

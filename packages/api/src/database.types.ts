@@ -686,6 +686,10 @@ export type Database = {
           teachers_total: number
         }[]
       }
+      set_current_academic_year: {
+        Args: { p_year_id: string }
+        Returns: undefined
+      }
       set_school_features: {
         Args: { p_features: string[]; p_school_id: string }
         Returns: undefined

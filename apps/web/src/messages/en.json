@@ -15,7 +15,12 @@
     "page_of": "Page {page} of {pageCount}",
     "toggle_sidebar": "Toggle sidebar",
     "show_password": "Show password",
-    "hide_password": "Hide password"
+    "hide_password": "Hide password",
+    "edit": "Edit",
+    "delete": "Delete",
+    "saved": "Saved",
+    "deleted": "Deleted",
+    "add": "Add"
   },
   "status": {
     "active": "Active",
@@ -50,7 +55,11 @@
     "slug_format": "Lowercase letters, digits and dashes only",
     "name_min": "Name is too short",
     "name_max": "Name is too long",
-    "color": "Invalid color"
+    "color": "Invalid color",
+    "date": "Enter a valid date",
+    "end_after_start": "End date must be after the start date",
+    "code_max": "Code must be at most 20 characters",
+    "code_format": "Letters, digits and dashes only"
   },
   "errors": {
     "unauthenticated": "Your session expired, please sign in again",
@@ -67,7 +76,9 @@
     "account_disabled": "This account or its school has been suspended",
     "no_web_access": "Parent accounts use the mobile app",
     "no_access": "This account is not linked to any school",
-    "slug_taken": "This slug is already used by another school"
+    "slug_taken": "This slug is already used by another school",
+    "in_use": "Can't delete: other records depend on it",
+    "name_taken": "This name is already in use"
   },
   "auth": {
     "title": "Sign in",
@@ -152,6 +163,84 @@
     "schools": "Schools",
     "admin": "School admin",
     "teacher": "Teacher workspace",
-    "student": "Student portal"
+    "student": "Student portal",
+    "structure": "Academic structure"
+  },
+  "structure": {
+    "title": "Academic structure",
+    "subtitle": "Academic years, grade levels, subjects and classes",
+    "tabs": {
+      "years": "Academic years",
+      "grades": "Grade levels",
+      "subjects": "Subjects",
+      "classes": "Classes"
+    },
+    "years": {
+      "add": "Add academic year",
+      "create_title": "New academic year",
+      "edit_title": "Edit academic year",
+      "name": "Year name",
+      "name_placeholder": "e.g. 2026/2027",
+      "starts_on": "Start date",
+      "ends_on": "End date",
+      "classes": "Classes",
+      "current": "Current",
+      "set_current": "Set as current year",
+      "current_updated": "Current year updated",
+      "empty": "No academic years yet",
+      "empty_hint": "Start by adding the current academic year",
+      "delete_title": "Delete academic year?",
+      "delete_description": "“{name}” will be permanently deleted.",
+      "in_use": "A year with classes can't be deleted"
+    },
+    "grades": {
+      "add": "Add grade level",
+      "create_title": "New grade level",
+      "edit_title": "Edit grade level",
+      "name": "Grade level name",
+      "name_placeholder": "e.g. Grade 1",
+      "order": "Order",
+      "classes": "Classes",
+      "move_up": "Move up",
+      "move_down": "Move down",
+      "empty": "No grade levels yet",
+      "empty_hint": "Add grade levels in order, e.g. Grade 1, Grade 2…",
+      "delete_title": "Delete grade level?",
+      "delete_description": "“{name}” will be permanently deleted.",
+      "in_use": "A grade level with classes can't be deleted"
+    },
+    "subjects": {
+      "add": "Add subject",
+      "create_title": "New subject",
+      "edit_title": "Edit subject",
+      "name": "Subject name",
+      "name_placeholder": "e.g. Mathematics",
+      "code": "Code",
+      "code_hint": "Optional — letters and digits, e.g. MATH",
+      "empty": "No subjects yet",
+      "empty_hint": "Add the subjects your school teaches",
+      "delete_title": "Delete subject?",
+      "delete_description": "“{name}” will be permanently deleted."
+    },
+    "classes": {
+      "add": "Add class",
+      "create_title": "New class",
+      "edit_title": "Edit class",
+      "name": "Class name",
+      "name_placeholder": "e.g. 1-A",
+      "grade": "Grade level",
+      "grade_placeholder": "Choose a grade level",
+      "homeroom": "Homeroom teacher",
+      "homeroom_none": "No homeroom teacher",
+      "students": "Students",
+      "year": "Academic year",
+      "empty": "No classes in this year",
+      "empty_hint": "Add this year's classes for each grade level",
+      "need_year": "Add an academic year first from the “Academic years” tab",
+      "need_grades": "Add at least one grade level from the “Grade levels” tab before creating classes",
+      "delete_title": "Delete class?",
+      "delete_description": "“{name}” will be permanently deleted.",
+      "in_use": "A class with enrolled students can't be deleted"
+    }
   }
 }

@@ -45,6 +45,43 @@ export type SessionContext = {
   features: FeatureKey[];
 };
 
+export type AcademicYear = {
+  id: string;
+  name: string;
+  startsOn: string;
+  endsOn: string;
+  isCurrent: boolean;
+  classesCount: number;
+};
+
+export type GradeLevel = {
+  id: string;
+  name: string;
+  sortOrder: number;
+  classesCount: number;
+};
+
+export type Subject = {
+  id: string;
+  name: string;
+  code: string | null;
+};
+
+export type SchoolClass = {
+  id: string;
+  name: string;
+  academicYearId: string;
+  gradeLevel: { id: string; name: string };
+  homeroomTeacher: { id: string; fullName: string } | null;
+  studentsCount: number;
+};
+
+/** Minimal person reference for pickers (e.g. choosing a homeroom teacher). */
+export type PersonOption = {
+  id: string;
+  fullName: string;
+};
+
 export type PlatformStats = {
   schoolsTotal: number;
   schoolsActive: number;
