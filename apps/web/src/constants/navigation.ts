@@ -76,6 +76,13 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
       permission: "attendance.view",
     },
     {
+      key: "homework",
+      href: "/admin/homework",
+      icon: NotebookPen,
+      permission: "homework.view",
+      feature: "homework",
+    },
+    {
       key: "exams",
       href: "/admin/exams",
       icon: ClipboardList,

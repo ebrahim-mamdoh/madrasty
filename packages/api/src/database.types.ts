@@ -303,6 +303,168 @@ export type Database = {
           },
         ]
       }
+      homework: {
+        Row: {
+          attachments: Json
+          body: string
+          class_id: string
+          class_subject_id: string
+          created_at: string
+          created_by: string | null
+          due_at: string
+          id: string
+          max_score: number | null
+          missing_notified_at: string | null
+          school_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          attachments?: Json
+          body?: string
+          class_id: string
+          class_subject_id: string
+          created_at?: string
+          created_by?: string | null
+          due_at: string
+          id?: string
+          max_score?: number | null
+          missing_notified_at?: string | null
+          school_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          attachments?: Json
+          body?: string
+          class_id?: string
+          class_subject_id?: string
+          created_at?: string
+          created_by?: string | null
+          due_at?: string
+          id?: string
+          max_score?: number | null
+          missing_notified_at?: string | null
+          school_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "homework_class_fkey"
+            columns: ["class_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "homework_class_subject_fkey"
+            columns: ["class_subject_id", "class_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "class_subjects"
+            referencedColumns: ["id", "class_id", "school_id"]
+          },
+          {
+            foreignKeyName: "homework_created_by_school_id_fkey"
+            columns: ["created_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "homework_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "homework_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      homework_submissions: {
+        Row: {
+          attachments: Json
+          body: string
+          feedback: string | null
+          graded_at: string | null
+          graded_by: string | null
+          homework_id: string
+          id: string
+          school_id: string
+          score: number | null
+          student_id: string
+          submitted_at: string
+        }
+        Insert: {
+          attachments?: Json
+          body?: string
+          feedback?: string | null
+          graded_at?: string | null
+          graded_by?: string | null
+          homework_id: string
+          id?: string
+          school_id: string
+          score?: number | null
+          student_id: string
+          submitted_at?: string
+        }
+        Update: {
+          attachments?: Json
+          body?: string
+          feedback?: string | null
+          graded_at?: string | null
+          graded_by?: string | null
+          homework_id?: string
+          id?: string
+          school_id?: string
+          score?: number | null
+          student_id?: string
+          submitted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "homework_submissions_graded_by_school_id_fkey"
+            columns: ["graded_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "homework_submissions_homework_fkey"
+            columns: ["homework_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "homework"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "homework_submissions_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "homework_submissions_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "homework_submissions_student_id_school_id_fkey"
+            columns: ["student_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string
@@ -925,6 +1087,15 @@ export type Database = {
         }[]
       }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
+      homework_overview: {
+        Args: { p_class_id?: string }
+        Returns: {
+          graded: number
+          homework_id: string
+          students: number
+          submitted: number
+        }[]
+      }
       my_permissions: { Args: never; Returns: string[] }
       platform_stats: {
         Args: never

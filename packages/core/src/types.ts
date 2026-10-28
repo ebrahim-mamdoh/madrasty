@@ -216,3 +216,61 @@ export type AttendanceRecord = {
   note: string | null;
   className: string;
 };
+
+/** A file attached to a homework or a submission (stored in the private `homework` bucket). */
+export type HomeworkAttachment = {
+  path: string;
+  name: string;
+  size: number;
+  type: string;
+};
+
+export type HomeworkSubmission = {
+  id: string;
+  studentId: string;
+  body: string;
+  attachments: HomeworkAttachment[];
+  submittedAt: string;
+  score: number | null;
+  feedback: string | null;
+  gradedAt: string | null;
+};
+
+export type Homework = {
+  id: string;
+  title: string;
+  body: string;
+  dueAt: string;
+  maxScore: number | null;
+  attachments: HomeworkAttachment[];
+  classId: string;
+  className: string;
+  classSubjectId: string;
+  subjectName: string;
+  createdAt: string;
+};
+
+/** Teacher / admin lists: the homework plus how the class is doing on it. */
+export type HomeworkWithStats = Homework & {
+  students: number;
+  submitted: number;
+  graded: number;
+};
+
+/** Student list: the homework plus their own submission (if any). */
+export type StudentHomework = Homework & { submission: HomeworkSubmission | null };
+
+/** Grading view: every student of the class with what they handed in. */
+export type SubmissionRosterEntry = {
+  studentId: string;
+  fullName: string;
+  submission: HomeworkSubmission | null;
+};
+
+/** A class subject the teacher can assign homework to (current year). */
+export type TeachingAssignment = {
+  classSubjectId: string;
+  classId: string;
+  className: string;
+  subjectName: string;
+};

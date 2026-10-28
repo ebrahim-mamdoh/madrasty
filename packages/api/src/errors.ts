@@ -19,6 +19,8 @@ const POSTGRES_CODES: Record<string, [AppError["code"], string?]> = {
   MD002: ["validation", "errors.period_overlap"], // timetable: periods overlap in time
   MD003: ["validation", "errors.student_not_in_class"], // attendance: student outside the class
   MD004: ["validation", "errors.future_date"], // attendance: date after today
+  MD005: ["conflict", "errors.already_graded"], // homework: submission locked after grading
+  MD006: ["validation", "errors.score_above_max"], // homework: score over the maximum
   PGRST116: ["not_found"], // .single() returned no rows (also: RLS hid the row)
   PGRST301: ["unauthenticated"], // JWT expired / invalid
 };
