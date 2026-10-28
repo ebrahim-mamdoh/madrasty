@@ -17,6 +17,8 @@ const POSTGRES_CODES: Record<string, [AppError["code"], string?]> = {
   P0002: ["not_found"], // raised by RPCs for unknown ids
   MD001: ["conflict", "errors.teacher_busy"], // timetable: teacher already teaching in that slot
   MD002: ["validation", "errors.period_overlap"], // timetable: periods overlap in time
+  MD003: ["validation", "errors.student_not_in_class"], // attendance: student outside the class
+  MD004: ["validation", "errors.future_date"], // attendance: date after today
   PGRST116: ["not_found"], // .single() returned no rows (also: RLS hid the row)
   PGRST301: ["unauthenticated"], // JWT expired / invalid
 };

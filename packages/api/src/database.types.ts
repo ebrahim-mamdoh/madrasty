@@ -59,6 +59,81 @@ export type Database = {
           },
         ]
       }
+      attendance_records: {
+        Row: {
+          class_id: string
+          created_at: string
+          date: string
+          id: string
+          note: string | null
+          recorded_by: string | null
+          school_id: string
+          status: Database["public"]["Enums"]["attendance_status"]
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          class_id: string
+          created_at?: string
+          date: string
+          id?: string
+          note?: string | null
+          recorded_by?: string | null
+          school_id: string
+          status: Database["public"]["Enums"]["attendance_status"]
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string
+          created_at?: string
+          date?: string
+          id?: string
+          note?: string | null
+          recorded_by?: string | null
+          school_id?: string
+          status?: Database["public"]["Enums"]["attendance_status"]
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_records_class_fkey"
+            columns: ["class_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "attendance_records_recorded_by_school_id_fkey"
+            columns: ["recorded_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "attendance_records_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_records_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_records_student_id_school_id_fkey"
+            columns: ["student_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+        ]
+      }
       class_subjects: {
         Row: {
           class_id: string
@@ -221,6 +296,58 @@ export type Database = {
           },
           {
             foreignKeyName: "grade_levels_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          kind: string
+          read_at: string | null
+          recipient_id: string
+          school_id: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          id?: string
+          kind: string
+          read_at?: string | null
+          recipient_id: string
+          school_id: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          kind?: string
+          read_at?: string | null
+          recipient_id?: string
+          school_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_recipient_id_school_id_fkey"
+            columns: ["recipient_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "notifications_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_school_id_fkey"
             columns: ["school_id"]
             isOneToOne: false
             referencedRelation: "schools_overview"
@@ -779,6 +906,17 @@ export type Database = {
       }
     }
     Functions: {
+      attendance_summary: {
+        Args: { p_class_id: string; p_from: string; p_to: string }
+        Returns: {
+          absent: number
+          excused: number
+          full_name: string
+          late: number
+          present: number
+          student_id: string
+        }[]
+      }
       class_teachers: {
         Args: { p_class_id: string }
         Returns: {
@@ -826,6 +964,7 @@ export type Database = {
         | "teacher"
         | "student"
         | "parent"
+      attendance_status: "present" | "absent" | "late" | "excused"
       school_status: "active" | "suspended"
     }
     CompositeTypes: {
@@ -962,6 +1101,7 @@ export const Constants = {
         "student",
         "parent",
       ],
+      attendance_status: ["present", "absent", "late", "excused"],
       school_status: ["active", "suspended"],
     },
   },

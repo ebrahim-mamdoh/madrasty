@@ -11,3 +11,4 @@ export * from "./schemas/people";
 export * from "./schemas/roles";
 export * from "./schemas/structure";
 export * from "./schemas/timetable";
+export * from "./schemas/attendance";

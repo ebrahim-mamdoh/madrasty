@@ -1,6 +1,7 @@
 import type { FeatureKey } from "./features";
 import type { PermissionKey } from "./permissions";
 import type { AppRole } from "./roles";
+import type { AttendanceCounts, AttendanceStatus } from "./schemas/attendance";
 
 export type SchoolStatus = "active" | "suspended";
 
@@ -185,4 +186,33 @@ export type StudentSubject = {
   subjectName: string;
   subjectCode: string | null;
   teacherName: string | null;
+};
+
+/** A student on a class's daily attendance sheet, with what was recorded (if anything). */
+export type AttendanceRosterEntry = {
+  studentId: string;
+  fullName: string;
+  status: AttendanceStatus | null;
+  note: string;
+};
+
+export type AttendanceDay = {
+  entries: AttendanceRosterEntry[];
+  /** When the sheet was last saved (null while the day isn't recorded yet). */
+  lastRecordedAt: string | null;
+};
+
+/** Per-student counts over a period (class report). */
+export type AttendanceSummaryRow = AttendanceCounts & {
+  studentId: string;
+  fullName: string;
+};
+
+/** One day in a student's own history. */
+export type AttendanceRecord = {
+  id: string;
+  date: string;
+  status: AttendanceStatus;
+  note: string | null;
+  className: string;
 };

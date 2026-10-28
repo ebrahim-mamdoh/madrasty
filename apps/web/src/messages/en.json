@@ -65,7 +65,8 @@
     "time": "Enter a valid time",
     "end_after_start_time": "The end time must be after the start time",
     "period_number": "Period number must be between 1 and 20",
-    "study_days": "Pick at least one study day"
+    "study_days": "Pick at least one study day",
+    "note_max": "Notes can't exceed 200 characters"
   },
   "errors": {
     "unauthenticated": "Your session expired, please sign in again",
@@ -87,7 +88,9 @@
     "name_taken": "This name is already in use",
     "teacher_busy": "This teacher already has a lesson in another class at that time",
     "period_overlap": "This time overlaps another period",
-    "period_number_taken": "This period number is already used"
+    "period_number_taken": "This period number is already used",
+    "student_not_in_class": "This student isn't enrolled in this class",
+    "future_date": "Attendance can't be recorded for a future date"
   },
   "auth": {
     "title": "Sign in",
@@ -199,7 +202,8 @@
     "school_detail": "School details",
     "timetable": "Timetable",
     "schedule": "My schedule",
-    "my_subjects": "My subjects"
+    "my_subjects": "My subjects",
+    "attendance": "Attendance"
   },
   "structure": {
     "title": "Academic structure",
@@ -528,5 +532,44 @@
     "empty": "Your class has no subjects yet",
     "no_class": "You haven't been placed in a class for the current year yet",
     "no_teacher": "Teacher not assigned yet"
+  },
+  "attendance": {
+    "title": "Attendance",
+    "admin_subtitle": "Each class's daily attendance and monthly attendance reports",
+    "teacher_subtitle": "Today's attendance — {date}",
+    "student_subtitle": "Your attendance record and rate this academic year",
+    "tabs": {
+      "daily": "Daily sheet",
+      "report": "Monthly report"
+    },
+    "class": "Class",
+    "date": "Date",
+    "month": "Month",
+    "student": "Student",
+    "status_label": "Status",
+    "note": "Note",
+    "rate": "Attendance rate",
+    "status": {
+      "present": "Present",
+      "absent": "Absent",
+      "late": "Late",
+      "excused": "Excused"
+    },
+    "status_for": "Status for {name}",
+    "note_for": "Note about {name}",
+    "note_placeholder": "Note (optional)",
+    "all_present": "All present",
+    "save": "Save attendance",
+    "update": "Update attendance",
+    "saved": "Attendance saved",
+    "last_saved": "Last saved: {time}",
+    "not_recorded": "Not recorded yet — everyone starts as present",
+    "not_recorded_short": "Not recorded",
+    "no_students": "No students in this class",
+    "no_classes": "There are no classes in the current academic year",
+    "teacher_no_classes": "You have no classes assigned this year",
+    "no_year": "There is no current academic year",
+    "student_empty": "No attendance has been recorded for you yet",
+    "saved_notified": "Attendance saved; parents of absent students were notified"
   }
 }
