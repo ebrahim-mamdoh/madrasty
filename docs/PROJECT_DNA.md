@@ -96,8 +96,14 @@ Server Component / Server Action → getServerServices() → services.x.y() → 
    **and** in the UI (to hide actions) — the UI check is UX, the RLS check is security.
 7. The service-role key is server-only (`SUPABASE_SECRET_KEY`, no `NEXT_PUBLIC_` prefix), validated by `env.ts`.
 8. Defense in depth on routes: `proxy.ts` refreshes the session and bounces anonymous users;
-   each portal layout re-checks the role on the server (`requireRole`).
+   each portal layout re-checks the role on the server (`requirePortal`); admin pages call
+   `requirePermission(permission, feature?)`, other feature-owned pages `requireFeature(portal, feature)`.
 9. Security headers (CSP, HSTS, frame-ancestors, referrer-policy, permissions-policy) are set in `next.config.ts`.
+10. **Plan features are enforced three times**: nav items carry `feature`, pages are gated server-side, and
+    RLS policies of feature-owned tables add `(select private.has_feature('<key>'))`.
+11. Staff roles / individual grants are only valid for `staff` and `teacher` profiles (DB trigger, 23514).
+12. Storage: a DELETE only sees rows the caller can SELECT — every bucket that lets users remove files needs a
+    matching SELECT policy, or removals silently do nothing.
 
 ---
 

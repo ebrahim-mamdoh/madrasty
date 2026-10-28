@@ -694,11 +694,14 @@ export type Database = {
         Args: { p_features: string[]; p_school_id: string }
         Returns: undefined
       }
-      update_school_branding: {
+      update_school_settings: {
         Args: {
           p_logo_path?: string
+          p_name: string
           p_primary_color: string
+          p_remove_logo?: boolean
           p_secondary_color: string
+          p_timezone: string
         }
         Returns: undefined
       }

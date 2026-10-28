@@ -8,7 +8,7 @@ import type {
   SubjectInput,
 } from "@madrasty/core";
 import type { Services } from "@madrasty/api";
-import { useSession } from "@/hooks/useSession";
+import { useSchoolId } from "@/hooks/useSession";
 import { getBrowserServices } from "@/lib/services.client";
 
 export const structureQueryKey = ["structure"] as const;
@@ -22,13 +22,6 @@ export const teacherOptionsQueryKey = [...structureQueryKey, "teacher-options"] 
 type StructureService = Services["structure"];
 
 const structure = () => getBrowserServices().structure;
-
-/** The admin portal always runs inside a school; fail loudly if that assumption breaks. */
-function useSchoolId(): string {
-  const { school } = useSession();
-  if (!school) throw new Error("Structure hooks require a school session");
-  return school.id;
-}
 
 /**
  * Every structure write can change counts shown on other tabs (classes per year/grade…),

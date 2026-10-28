@@ -2,27 +2,18 @@
 
 import {
   AppError,
+  PERSON_MANAGE_PERMISSION as MANAGE_PERMISSION,
   createPersonSchema,
   isAppError,
+  isManagedPersonRole as isManagedRole,
   resetPasswordSchema,
   type CreatePersonInput,
-  type ManagedPersonRole,
   type PermissionKey,
   type ResetPasswordInput,
 } from "@madrasty/core";
 import { getSession } from "@/lib/auth";
 import { parseInput, runAction, type ActionResult } from "@/lib/actions";
 import { getAdminServices, getServerServices } from "@/lib/services.server";
-
-const MANAGE_PERMISSION: Record<ManagedPersonRole, PermissionKey> = {
-  teacher: "teachers.manage",
-  student: "students.manage",
-  parent: "parents.manage",
-};
-
-function isManagedRole(role: string): role is ManagedPersonRole {
-  return role in MANAGE_PERMISSION;
-}
 
 /** The caller must be signed in to a school and hold `permission`. Never trust the client. */
 async function authorize(permission: PermissionKey) {

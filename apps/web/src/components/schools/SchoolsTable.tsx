@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Link } from "@/i18n/navigation";
 
 export type SchoolsTableProps = {
   schools: SchoolListItem[];
@@ -63,7 +64,12 @@ export function SchoolsTable({ schools, isLoading, onStatusChange }: SchoolsTabl
             : schools.map((school) => (
                 <TableRow key={school.id}>
                   <TableCell>
-                    <p className="font-medium">{school.name}</p>
+                    <Link
+                      href={`/platform/schools/${school.id}`}
+                      className="font-medium hover:underline"
+                    >
+                      {school.name}
+                    </Link>
                     <p className="text-xs text-muted-foreground" dir="ltr">
                       {school.slug}
                     </p>

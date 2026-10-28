@@ -132,3 +132,26 @@ export type PlatformStats = {
   studentsTotal: number;
   teachersTotal: number;
 };
+
+export type StaffRole = {
+  id: string;
+  name: string;
+  permissions: PermissionKey[];
+  membersCount: number;
+};
+
+/** A staff member or teacher with everything that grants them permissions. */
+export type PersonAccess = {
+  id: string;
+  fullName: string;
+  role: "staff" | "teacher";
+  roleIds: string[];
+  permissions: PermissionKey[];
+};
+
+export type SchoolAdmin = {
+  id: string;
+  fullName: string;
+  email: string | null;
+  isActive: boolean;
+};

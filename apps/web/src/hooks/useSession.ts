@@ -18,6 +18,13 @@ export function usePermission(permission: PermissionKey): boolean {
   return useSession().permissions.includes(permission);
 }
 
+/** School portals always run inside a school; fail loudly if that assumption breaks. */
+export function useSchoolId(): string {
+  const { school } = useSession();
+  if (!school) throw new Error("This hook requires a school session");
+  return school.id;
+}
+
 export function useFeature(feature: FeatureKey): boolean {
   return useSession().features.includes(feature);
 }

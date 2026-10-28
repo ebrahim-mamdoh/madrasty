@@ -118,10 +118,7 @@ export function createPeopleService(client: TypedSupabaseClient) {
         );
       }
 
-      let query = client
-        .from("profiles")
-        .select(BASE_COLUMNS, { count: "exact" })
-        .eq("role", "teacher");
+      let query = client.from("profiles").select(BASE_COLUMNS, { count: "exact" }).eq("role", role);
       if (search) query = query.ilike("full_name", likePattern(search));
 
       const { data, count, error } = await query.order("full_name").range(from, to);

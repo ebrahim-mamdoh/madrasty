@@ -1,9 +1,29 @@
 import { z } from "zod";
+import type { PermissionKey } from "../permissions";
 import { emailSchema, passwordSchema } from "./auth";
 
-/** Roles a school manages from the admin portal (staff accounts come with the roles module). */
-export const MANAGED_PERSON_ROLES = ["teacher", "student", "parent"] as const;
+/** Roles a school manages from the admin portal. */
+export const MANAGED_PERSON_ROLES = ["teacher", "student", "parent", "staff"] as const;
 export type ManagedPersonRole = (typeof MANAGED_PERSON_ROLES)[number];
+
+/** The permission that lets someone see / manage accounts of each role. Single source for UI + server. */
+export const PERSON_VIEW_PERMISSION = {
+  teacher: "teachers.view",
+  student: "students.view",
+  parent: "parents.view",
+  staff: "staff.view",
+} as const satisfies Record<ManagedPersonRole, PermissionKey>;
+
+export const PERSON_MANAGE_PERMISSION = {
+  teacher: "teachers.manage",
+  student: "students.manage",
+  parent: "parents.manage",
+  staff: "staff.manage",
+} as const satisfies Record<ManagedPersonRole, PermissionKey>;
+
+export function isManagedPersonRole(role: string): role is ManagedPersonRole {
+  return (MANAGED_PERSON_ROLES as readonly string[]).includes(role);
+}
 
 /** Optional phone: digits with an optional leading +, spaces and dashes allowed. */
 const phoneSchema = z
@@ -30,6 +50,7 @@ export const personAccountSchema = z.object(personBase);
 /** Creating an account. Students may be placed in a class; parents may be linked to children. */
 export const createPersonSchema = z.discriminatedUnion("role", [
   z.object({ role: z.literal("teacher"), ...personBase }),
+  z.object({ role: z.literal("staff"), ...personBase }),
   z.object({
     role: z.literal("student"),
     ...personBase,

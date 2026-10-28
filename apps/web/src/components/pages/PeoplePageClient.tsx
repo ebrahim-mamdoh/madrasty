@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
   DEFAULT_PAGE_SIZE,
+  PERSON_MANAGE_PERMISSION,
   type ManagedPersonRole,
-  type PermissionKey,
   type PersonListItem,
 } from "@madrasty/core";
 import { PersonFormDialog, ROLE_NAMESPACE } from "@/components/people/PersonFormDialog";
@@ -27,7 +27,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { usePeople, useSetPersonActive } from "@/hooks/queries/people/usePeople";
+import {
+  usePeople,
+  useResetPassword,
+  useSetPersonActive,
+} from "@/hooks/queries/people/usePeople";
 import { useAcademicYears, useClasses } from "@/hooks/queries/structure/useStructure";
 import { useCrudDialogs } from "@/hooks/useCrudDialogs";
 import { useDebouncedValue } from "@/hooks/useDebouncedValue";
@@ -35,12 +39,6 @@ import { useErrorMessage } from "@/hooks/useErrorMessage";
 import { usePermission } from "@/hooks/useSession";
 import { useUrlState } from "@/hooks/useUrlState";
 import { notifyError, notifySuccess } from "@/lib/utils";
-
-const MANAGE_PERMISSION: Record<ManagedPersonRole, PermissionKey> = {
-  teacher: "teachers.manage",
-  student: "students.manage",
-  parent: "parents.manage",
-};
 
 const ALL_CLASSES = "__all__";
 
@@ -56,7 +54,7 @@ export function PeoplePageClient({ role }: PeoplePageClientProps) {
   const tParents = useTranslations("people.parents");
   const tc = useTranslations("common");
   const toMessage = useErrorMessage();
-  const canManage = usePermission(MANAGE_PERMISSION[role]);
+  const canManage = usePermission(PERSON_MANAGE_PERMISSION[role]);
   const { searchParams, setParams } = useUrlState();
 
   // Students are shown with (and filtered by) their class in the current academic year.
@@ -83,6 +81,7 @@ export function PeoplePageClient({ role }: PeoplePageClientProps) {
   });
 
   const setActive = useSetPersonActive();
+  const resetPassword = useResetPassword();
   const dialogs = useCrudDialogs<PersonListItem>();
   const [resetting, setResetting] = useState<PersonListItem | null>(null);
 
@@ -288,6 +287,7 @@ export function PeoplePageClient({ role }: PeoplePageClientProps) {
         key={resetting?.id ?? "none"}
         person={resetting}
         onOpenChange={(open) => !open && setResetting(null)}
+        reset={resetPassword}
       />
       <ConfirmDialog
         open={Boolean(dialogs.deleting)}

@@ -60,3 +60,19 @@ export function permissionModule(key: PermissionKey): PermissionModule {
 export function isPermissionKey(value: unknown): value is PermissionKey {
   return typeof value === "string" && (PERMISSION_KEYS as readonly string[]).includes(value);
 }
+
+type ActionOf<K> = K extends `${string}.${infer A}` ? A : never;
+
+/** The verb half of a permission key ("view", "manage", "approve"…). */
+export type PermissionAction = ActionOf<PermissionKey>;
+
+export function permissionAction(key: PermissionKey): PermissionAction {
+  return key.split(".")[1] as PermissionAction;
+}
+
+/** The catalog grouped by module, in catalog order (permission editors render one row per module). */
+export const PERMISSIONS_BY_MODULE: { module: PermissionModule; keys: PermissionKey[] }[] =
+  PERMISSION_MODULES.map((module) => ({
+    module,
+    keys: PERMISSION_KEYS.filter((key) => permissionModule(key) === module),
+  }));

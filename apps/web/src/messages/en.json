@@ -157,6 +157,19 @@
       "suspend": "Suspend school",
       "activate": "Activate school",
       "status_updated": "School status updated"
+    },
+    "school": {
+      "back": "All schools",
+      "subtitle": "School details, plan and admin accounts",
+      "info_title": "School details",
+      "features_title": "Enabled features",
+      "features_hint": "Disabled modules disappear from the school's portals and cannot be used",
+      "features_saved": "School features updated",
+      "admins_title": "School admins",
+      "add_admin": "Add admin",
+      "add_admin_title": "New school admin",
+      "admin_added": "Admin account created",
+      "no_admins": "This school has no admins"
     }
   },
   "metadata": {
@@ -170,7 +183,11 @@
     "teachers": "Teachers",
     "students": "Students",
     "parents": "Parents",
-    "my_classes": "My classes"
+    "my_classes": "My classes",
+    "staff": "Staff",
+    "roles": "Roles & permissions",
+    "settings": "School settings",
+    "school_detail": "School details"
   },
   "structure": {
     "title": "Academic structure",
@@ -328,7 +345,15 @@
       "no_students": "No matching students",
       "selected_count": "{count, plural, =0 {None selected} one {1 student} other {# students}}"
     },
-    "empty_search": "No matching results"
+    "empty_search": "No matching results",
+    "staff": {
+      "title": "Staff",
+      "subtitle": "Administrative staff accounts; their access is set in “Roles & permissions”",
+      "add": "Add staff member",
+      "create_title": "New staff member",
+      "edit_title": "Edit staff member",
+      "empty": "No staff members yet"
+    }
   },
   "teacher": {
     "classes": {
@@ -340,5 +365,93 @@
       "homeroom_only": "Homeroom only",
       "students": "{count, plural, =0 {No students} one {1 student} other {# students}}"
     }
+  },
+  "permissions": {
+    "inherited": "Granted through a role",
+    "modules": {
+      "structure": "Academic structure",
+      "students": "Students",
+      "teachers": "Teachers",
+      "parents": "Parents",
+      "staff": "Staff",
+      "roles": "Roles & permissions",
+      "attendance": "Attendance",
+      "homework": "Homework",
+      "exams": "Exams",
+      "grades": "Grades",
+      "reports": "Monthly reports",
+      "finance": "Finance",
+      "monitoring": "Monitoring",
+      "settings": "Settings"
+    },
+    "actions": {
+      "view": "View",
+      "manage": "Manage",
+      "record": "Record",
+      "approve": "Approve",
+      "edit": "Edit",
+      "send": "Send",
+      "branding": "Identity & settings"
+    }
+  },
+  "access": {
+    "title": "Roles & permissions",
+    "subtitle": "Create roles that bundle permissions, then grant them to staff and teachers",
+    "tabs": {
+      "roles": "Roles",
+      "people": "People's access"
+    },
+    "roles": {
+      "add": "Add role",
+      "create_title": "New role",
+      "edit_title": "Edit role",
+      "name": "Role name",
+      "name_placeholder": "e.g. Academic supervisor",
+      "permissions": "Permissions",
+      "permissions_hint": "Everyone given this role gets these permissions",
+      "permissions_count": "{count, plural, =0 {No permissions} one {# permission} other {# permissions}}",
+      "members": "People",
+      "empty": "No roles yet",
+      "empty_hint": "Create a role such as “Accountant” or “Academic supervisor” and pick its permissions",
+      "delete_title": "Delete role?",
+      "delete_description": "The “{name}” role will be deleted and its permissions removed from {count, plural, =0 {everyone} one {# person} other {# people}}."
+    },
+    "people": {
+      "name": "Name",
+      "type": "Account type",
+      "groups": "Roles",
+      "extra": "Extra permissions",
+      "extra_count": "{count, plural, one {# permission} other {# permissions}}",
+      "edit": "Edit access",
+      "edit_title": "Access for {name}",
+      "edit_description": "Pick their roles and add individual permissions when needed",
+      "groups_label": "Roles",
+      "groups_hint": "They get every permission of the selected roles",
+      "no_groups": "No roles yet — create them in the “Roles” tab",
+      "extra_label": "Individual permissions",
+      "extra_hint": "Ticked and locked permissions come from their roles",
+      "empty": "No active staff or teachers",
+      "empty_hint": "Add staff from the “Staff” page or teachers from the “Teachers” page"
+    }
+  },
+  "settings": {
+    "title": "School settings",
+    "subtitle": "Your school's name and identity across every portal and the app",
+    "identity": "School details",
+    "identity_hint": "The name everyone sees and the time zone for school schedules",
+    "name": "School name",
+    "timezone": "Time zone",
+    "branding": "Visual identity",
+    "branding_hint": "The logo and colors apply to the school portals and the parent app",
+    "logo": "School logo",
+    "logo_hint": "PNG, JPG or WEBP, up to 2 MB",
+    "upload_logo": "Upload logo",
+    "change_logo": "Change logo",
+    "remove_logo": "Remove",
+    "logo_type": "Unsupported file type — use PNG, JPG or WEBP",
+    "logo_too_large": "The logo is larger than 2 MB",
+    "primary_color": "Primary color",
+    "secondary_color": "Secondary color",
+    "saved": "School settings saved"
   }
 }

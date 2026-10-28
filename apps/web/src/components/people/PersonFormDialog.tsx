@@ -49,6 +49,7 @@ export const ROLE_NAMESPACE = {
   teacher: "teachers",
   student: "students",
   parent: "parents",
+  staff: "staff",
 } as const satisfies Record<ManagedPersonRole, string>;
 
 export type PersonFormDialogProps = {

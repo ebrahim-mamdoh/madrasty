@@ -1,17 +1,20 @@
 import {
+  AppError,
   pageRange,
   toPaginated,
-  type BrandingInput,
   type FeatureKey,
   type PageParams,
   type Paginated,
   type PlatformStats,
   type School,
+  type SchoolAdmin,
   type SchoolListItem,
+  type SchoolSettingsInput,
   type SchoolStatus,
+  type UpdateSchoolInput,
 } from "@madrasty/core";
-import type { TypedSupabaseClient } from "../client";
-import { unwrap } from "../errors";
+import { STORAGE_BUCKETS, type TypedSupabaseClient } from "../client";
+import { toAppError, unwrap } from "../errors";
 import { SCHOOL_COLUMNS, toFeatureKeys, toSchool, toSchoolListItem } from "../mappers";
 
 export type SchoolsListParams = PageParams & {
@@ -83,15 +86,76 @@ export function createSchoolsService(client: TypedSupabaseClient) {
       );
     },
 
-    async updateOwnBranding(input: BrandingInput & { logoPath?: string }): Promise<void> {
-      unwrap(
-        await client.rpc("update_school_branding", {
-          p_primary_color: input.primaryColor,
-          p_secondary_color: input.secondaryColor,
-          // Omitted → SQL default (keeps the current logo).
-          p_logo_path: input.logoPath,
-        }),
+    /**
+     * The caller's own school (Admin → Settings). The RPC checks settings.branding; storage
+     * policies only accept writes to `{school_id}/…` by holders of the same permission.
+     * A replaced or removed logo file is deleted afterwards so the bucket doesn't keep orphans.
+     */
+    async updateOwnSettings(
+      schoolId: string,
+      input: SchoolSettingsInput,
+      logo?: { file: Blob; extension: string } | "remove",
+    ): Promise<void> {
+      const bucket = client.storage.from(STORAGE_BUCKETS.schoolBranding);
+      const { logo_path: previousPath } = unwrap(
+        await client.from("schools").select("logo_path").eq("id", schoolId).single(),
       );
+
+      let logoPath: string | undefined;
+      if (logo && logo !== "remove") {
+        logoPath = `${schoolId}/logo-${Date.now()}.${logo.extension}`;
+        const { error } = await bucket.upload(logoPath, logo.file, {
+          contentType: logo.file.type,
+          upsert: false,
+          cacheControl: "31536000",
+        });
+        if (error) throw toAppError(error);
+      }
+
+      try {
+        unwrap(
+          await client.rpc("update_school_settings", {
+            p_name: input.name,
+            p_primary_color: input.primaryColor,
+            p_secondary_color: input.secondaryColor,
+            p_timezone: input.timezone,
+            // Omitted → SQL default (keeps the current logo).
+            p_logo_path: logoPath,
+            p_remove_logo: logo === "remove",
+          }),
+        );
+      } catch (error) {
+        if (logoPath) await bucket.remove([logoPath]);
+        throw error;
+      }
+
+      if (previousPath && logo) await bucket.remove([previousPath]);
+    },
+
+    /** Super Admin: rename a school. RLS limits updates to the platform owner. */
+    async update(id: string, input: UpdateSchoolInput): Promise<void> {
+      const rows = unwrap(
+        await client.from("schools").update({ name: input.name }).eq("id", id).select("id"),
+      );
+      if (rows.length === 0) throw new AppError("not_found");
+    },
+
+    /** Super Admin: the admin accounts of a school. */
+    async listAdmins(schoolId: string): Promise<SchoolAdmin[]> {
+      const rows = unwrap(
+        await client
+          .from("profiles")
+          .select("id, full_name, email, is_active")
+          .eq("school_id", schoolId)
+          .eq("role", "school_admin")
+          .order("full_name"),
+      );
+      return rows.map((row) => ({
+        id: row.id,
+        fullName: row.full_name,
+        email: row.email,
+        isActive: row.is_active,
+      }));
     },
 
     async platformStats(): Promise<PlatformStats> {

@@ -1,9 +1,15 @@
 import "server-only";
 import { cache } from "react";
 import { getLocale } from "next-intl/server";
-import { ROLE_PORTAL, type PermissionKey, type Portal, type SessionContext } from "@madrasty/core";
+import {
+  ROLE_PORTAL,
+  type FeatureKey,
+  type PermissionKey,
+  type Portal,
+  type SessionContext,
+} from "@madrasty/core";
 import { redirect } from "@/i18n/navigation";
-import { homeForRole } from "@/lib/portals";
+import { PORTAL_HOME, homeForRole } from "@/lib/portals";
 import { getServerServices } from "@/lib/services.server";
 
 /** The signed-in user's context, or null. Memoized per request. */
@@ -28,10 +34,28 @@ export async function requirePortal(portal: Portal): Promise<SessionContext> {
 }
 
 /** Server-side gate for a page inside the admin portal. */
-export async function requirePermission(permission: PermissionKey): Promise<SessionContext> {
+export async function requirePermission(
+  permission: PermissionKey,
+  feature?: FeatureKey,
+): Promise<SessionContext> {
   const session = await requirePortal("admin");
   if (!session.permissions.includes(permission)) {
     return redirectTo("/admin");
+  }
+  if (feature && !session.features.includes(feature)) {
+    return redirectTo("/admin");
+  }
+  return session;
+}
+
+/**
+ * Server-side gate for a feature-owned page in any school portal: a module the school's plan
+ * doesn't include is unreachable even by URL (the DB enforces the same via private.has_feature).
+ */
+export async function requireFeature(portal: Portal, feature: FeatureKey): Promise<SessionContext> {
+  const session = await requirePortal(portal);
+  if (!session.features.includes(feature)) {
+    return redirectTo(PORTAL_HOME[portal]);
   }
   return session;
 }

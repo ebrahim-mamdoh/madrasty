@@ -1,5 +1,6 @@
 import type { TypedSupabaseClient } from "./client";
 import { createPeopleService } from "./services/people";
+import { createRolesService } from "./services/roles";
 import { createSchoolsService } from "./services/schools";
 import { createSessionService } from "./services/session";
 import { createStructureService } from "./services/structure";
@@ -16,6 +17,7 @@ export function createServices(client: TypedSupabaseClient) {
     structure: createStructureService(client),
     people: createPeopleService(client),
     teaching: createTeachingService(client),
+    roles: createRolesService(client),
   };
 }
 
