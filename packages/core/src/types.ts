@@ -2,6 +2,7 @@ import type { FeatureKey } from "./features";
 import type { PermissionKey } from "./permissions";
 import type { AppRole } from "./roles";
 import type { AttendanceCounts, AttendanceStatus } from "./schemas/attendance";
+import type { ExamKind, ExamMode, ExamStatus, QuestionType } from "./schemas/exams";
 
 export type SchoolStatus = "active" | "suspended";
 
@@ -272,5 +273,74 @@ export type TeachingAssignment = {
   classSubjectId: string;
   classId: string;
   className: string;
+  subjectId: string;
   subjectName: string;
+};
+
+export type Exam = {
+  id: string;
+  title: string;
+  kind: ExamKind;
+  mode: ExamMode;
+  startsAt: string;
+  durationMinutes: number;
+  maxScore: number;
+  instructions: string;
+  status: ExamStatus;
+  reviewNote: string | null;
+  classId: string;
+  className: string;
+  classSubjectId: string;
+  subjectId: string;
+  subjectName: string;
+  publishedAt: string | null;
+};
+
+export type ExamQuestion = {
+  id: string;
+  position: number;
+  type: QuestionType;
+  text: string;
+  options: string[];
+  /** Option index (MCQ), boolean (true/false) or null (short answer). */
+  correctAnswer: number | boolean | null;
+  points: number;
+};
+
+export type BankQuestion = Omit<ExamQuestion, "position"> & { subjectId: string };
+
+/** The paper handed out by start_exam: no correct answers inside. */
+export type ExamPaper = {
+  exam: { id: string; title: string; instructions: string; maxScore: number; endsAt: string };
+  startedAt: string;
+  questions: Omit<ExamQuestion, "position" | "correctAnswer">[];
+};
+
+/** Student answers keyed by question id: option index, boolean or text. */
+export type ExamAnswers = Record<string, number | boolean | string>;
+
+/** Results view: every student of the class, their result and (online) their attempt. */
+export type ExamResultEntry = {
+  studentId: string;
+  fullName: string;
+  score: number | null;
+  note: string | null;
+  attempt: { submittedAt: string | null; answers: ExamAnswers; autoScore: number | null } | null;
+};
+
+/** Student list: the exam plus where they stand on it. */
+export type StudentExam = Exam & {
+  attemptSubmittedAt: string | null;
+  score: number | null;
+};
+
+/** One published result in the student's (or parent's) grade report. */
+export type StudentGrade = {
+  examId: string;
+  title: string;
+  kind: ExamKind;
+  subjectName: string;
+  score: number;
+  maxScore: number;
+  startsAt: string;
 };

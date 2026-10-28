@@ -13,3 +13,4 @@ export * from "./schemas/structure";
 export * from "./schemas/timetable";
 export * from "./schemas/attendance";
 export * from "./schemas/homework";
+export * from "./schemas/exams";

@@ -89,7 +89,13 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
       permission: "exams.view",
       feature: "exams",
     },
-    { key: "grades", href: "/admin/grades", icon: Trophy, permission: "grades.view" },
+    {
+      key: "grades",
+      href: "/admin/grades",
+      icon: Trophy,
+      permission: "grades.view",
+      feature: "exams",
+    },
     {
       key: "reports",
       href: "/admin/reports",
@@ -106,7 +112,7 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
     { key: "attendance", href: "/teacher/attendance", icon: CalendarCheck },
     { key: "homework", href: "/teacher/homework", icon: NotebookPen, feature: "homework" },
     { key: "exams", href: "/teacher/exams", icon: ClipboardList, feature: "exams" },
-    { key: "grades", href: "/teacher/grades", icon: Trophy },
+    { key: "grades", href: "/teacher/grades", icon: Trophy, feature: "exams" },
     { key: "reports", href: "/teacher/reports", icon: FileText, feature: "monthly_reports" },
   ],
   student: [
@@ -116,6 +122,6 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
     { key: "attendance", href: "/student/attendance", icon: CalendarCheck },
     { key: "homework", href: "/student/homework", icon: NotebookPen, feature: "homework" },
     { key: "exams", href: "/student/exams", icon: ClipboardList, feature: "exams" },
-    { key: "my_grades", href: "/student/grades", icon: Trophy },
+    { key: "my_grades", href: "/student/grades", icon: Trophy, feature: "exams" },
   ],
 };

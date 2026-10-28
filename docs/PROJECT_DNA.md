@@ -104,6 +104,12 @@ Server Component / Server Action → getServerServices() → services.x.y() → 
 11. Staff roles / individual grants are only valid for `staff` and `teacher` profiles (DB trigger, 23514).
 12. Storage: a DELETE only sees rows the caller can SELECT — every bucket that lets users remove files needs a
     matching SELECT policy, or removals silently do nothing.
+13. Public `security definer` RPCs are the exception, never the default. Each one checks school + permission
+    itself and is listed here (the advisor warns about all of them — intentionally):
+    `update_school_settings`, `set_school_study_days`, `class_teachers` (names only), `exam_transition`
+    (the only way to change an exam's status), `start_exam` / `submit_exam` (students never read questions).
+    Everything else that can run under RLS is `security invoker` (`attendance_summary`, `homework_overview`).
+14. Custom error codes raised by the DB are `MDxxx` and mapped to i18n keys in `packages/api/src/errors.ts`.
 
 ---
 

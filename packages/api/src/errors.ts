@@ -20,7 +20,13 @@ const POSTGRES_CODES: Record<string, [AppError["code"], string?]> = {
   MD003: ["validation", "errors.student_not_in_class"], // attendance: student outside the class
   MD004: ["validation", "errors.future_date"], // attendance: date after today
   MD005: ["conflict", "errors.already_graded"], // homework: submission locked after grading
-  MD006: ["validation", "errors.score_above_max"], // homework: score over the maximum
+  MD006: ["validation", "errors.score_above_max"], // homework / exams: score over the maximum
+  MD007: ["validation", "errors.invalid_question"], // exams: malformed question
+  MD008: ["validation", "errors.no_questions"], // exams: online exam without questions
+  MD009: ["validation", "errors.reason_required"], // exams: rejection without a reason
+  MD010: ["validation", "errors.exam_not_started"], // exam room: before the start time
+  MD011: ["conflict", "errors.exam_already_submitted"], // exam room: submitted already
+  MD012: ["validation", "errors.exam_closed"], // exam room: after the end time
   PGRST116: ["not_found"], // .single() returned no rows (also: RLS hid the row)
   PGRST301: ["unauthenticated"], // JWT expired / invalid
 };

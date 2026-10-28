@@ -21,10 +21,12 @@ export type ConfirmDialogProps = {
   description?: string;
   confirmLabel?: string;
   isPending?: boolean;
+  /** Red confirm button (deletions); false for positive confirmations such as approving. */
+  destructive?: boolean;
   onConfirm: () => void;
 };
 
-/** Destructive confirmation. Stays open while `isPending`; the caller closes it on success. */
+/** Confirmation (destructive by default). Stays open while `isPending`; the caller closes it on success. */
 export function ConfirmDialog({
   open,
   onOpenChange,
@@ -32,6 +34,7 @@ export function ConfirmDialog({
   description,
   confirmLabel,
   isPending,
+  destructive = true,
   onConfirm,
 }: ConfirmDialogProps) {
   const t = useTranslations("common");
@@ -46,7 +49,7 @@ export function ConfirmDialog({
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isPending}>{t("cancel")}</AlertDialogCancel>
           <AlertDialogAction
-            className={buttonVariants({ variant: "destructive" })}
+            className={buttonVariants({ variant: destructive ? "destructive" : "default" })}
             disabled={isPending}
             onClick={(event) => {
               // Keep the dialog open until the mutation settles.

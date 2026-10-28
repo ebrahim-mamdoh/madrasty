@@ -155,7 +155,7 @@ export function createHomeworkService(client: TypedSupabaseClient) {
       const rows = unwrap(
         await client
           .from("class_subjects")
-          .select("id, class:classes!inner(id, name, academic_year_id), subject:subjects(name)")
+          .select("id, class:classes!inner(id, name, academic_year_id), subject:subjects(id, name)")
           .eq("teacher_id", teacherId)
           .eq("class.academic_year_id", yearId),
       );
@@ -164,6 +164,7 @@ export function createHomeworkService(client: TypedSupabaseClient) {
           classSubjectId: row.id,
           classId: row.class.id,
           className: row.class.name,
+          subjectId: row.subject.id,
           subjectName: row.subject.name,
         }))
         .sort(

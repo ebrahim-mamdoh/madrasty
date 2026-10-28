@@ -249,6 +249,307 @@ export type Database = {
           },
         ]
       }
+      exam_attempts: {
+        Row: {
+          answers: Json
+          auto_score: number | null
+          exam_id: string
+          id: string
+          school_id: string
+          started_at: string
+          student_id: string
+          submitted_at: string | null
+        }
+        Insert: {
+          answers?: Json
+          auto_score?: number | null
+          exam_id: string
+          id?: string
+          school_id: string
+          started_at?: string
+          student_id: string
+          submitted_at?: string | null
+        }
+        Update: {
+          answers?: Json
+          auto_score?: number | null
+          exam_id?: string
+          id?: string
+          school_id?: string
+          started_at?: string
+          student_id?: string
+          submitted_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_attempts_exam_fkey"
+            columns: ["exam_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "exam_attempts_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_attempts_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_attempts_student_id_school_id_fkey"
+            columns: ["student_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+        ]
+      }
+      exam_questions: {
+        Row: {
+          correct_answer: Json | null
+          created_at: string
+          exam_id: string
+          id: string
+          options: Json
+          points: number
+          position: number
+          school_id: string
+          text: string
+          type: Database["public"]["Enums"]["question_type"]
+        }
+        Insert: {
+          correct_answer?: Json | null
+          created_at?: string
+          exam_id: string
+          id?: string
+          options?: Json
+          points?: number
+          position?: number
+          school_id: string
+          text: string
+          type: Database["public"]["Enums"]["question_type"]
+        }
+        Update: {
+          correct_answer?: Json | null
+          created_at?: string
+          exam_id?: string
+          id?: string
+          options?: Json
+          points?: number
+          position?: number
+          school_id?: string
+          text?: string
+          type?: Database["public"]["Enums"]["question_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_questions_exam_fkey"
+            columns: ["exam_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "exam_questions_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_questions_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exam_results: {
+        Row: {
+          exam_id: string
+          id: string
+          note: string | null
+          recorded_by: string | null
+          school_id: string
+          score: number
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          exam_id: string
+          id?: string
+          note?: string | null
+          recorded_by?: string | null
+          school_id: string
+          score: number
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          exam_id?: string
+          id?: string
+          note?: string | null
+          recorded_by?: string | null
+          school_id?: string
+          score?: number
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exam_results_exam_fkey"
+            columns: ["exam_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "exams"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "exam_results_recorded_by_school_id_fkey"
+            columns: ["recorded_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "exam_results_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_results_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exam_results_student_id_school_id_fkey"
+            columns: ["student_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+        ]
+      }
+      exams: {
+        Row: {
+          class_id: string
+          class_subject_id: string
+          created_at: string
+          created_by: string | null
+          duration_minutes: number
+          id: string
+          instructions: string
+          kind: Database["public"]["Enums"]["exam_kind"]
+          max_score: number
+          mode: Database["public"]["Enums"]["exam_mode"]
+          published_at: string | null
+          review_note: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          school_id: string
+          starts_at: string
+          status: Database["public"]["Enums"]["exam_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          class_id: string
+          class_subject_id: string
+          created_at?: string
+          created_by?: string | null
+          duration_minutes?: number
+          id?: string
+          instructions?: string
+          kind: Database["public"]["Enums"]["exam_kind"]
+          max_score: number
+          mode?: Database["public"]["Enums"]["exam_mode"]
+          published_at?: string | null
+          review_note?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          school_id: string
+          starts_at: string
+          status?: Database["public"]["Enums"]["exam_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string
+          class_subject_id?: string
+          created_at?: string
+          created_by?: string | null
+          duration_minutes?: number
+          id?: string
+          instructions?: string
+          kind?: Database["public"]["Enums"]["exam_kind"]
+          max_score?: number
+          mode?: Database["public"]["Enums"]["exam_mode"]
+          published_at?: string | null
+          review_note?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          school_id?: string
+          starts_at?: string
+          status?: Database["public"]["Enums"]["exam_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exams_class_fkey"
+            columns: ["class_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "classes"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "exams_class_subject_fkey"
+            columns: ["class_subject_id", "class_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "class_subjects"
+            referencedColumns: ["id", "class_id", "school_id"]
+          },
+          {
+            foreignKeyName: "exams_created_by_school_id_fkey"
+            columns: ["created_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "exams_reviewed_by_school_id_fkey"
+            columns: ["reviewed_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "exams_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exams_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       features: {
         Row: {
           key: string
@@ -733,6 +1034,74 @@ export type Database = {
           },
         ]
       }
+      question_bank: {
+        Row: {
+          correct_answer: Json | null
+          created_at: string
+          created_by: string | null
+          id: string
+          options: Json
+          points: number
+          school_id: string
+          subject_id: string
+          text: string
+          type: Database["public"]["Enums"]["question_type"]
+        }
+        Insert: {
+          correct_answer?: Json | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          options?: Json
+          points?: number
+          school_id: string
+          subject_id: string
+          text: string
+          type: Database["public"]["Enums"]["question_type"]
+        }
+        Update: {
+          correct_answer?: Json | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          options?: Json
+          points?: number
+          school_id?: string
+          subject_id?: string
+          text?: string
+          type?: Database["public"]["Enums"]["question_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_bank_created_by_school_id_fkey"
+            columns: ["created_by", "school_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id", "school_id"]
+          },
+          {
+            foreignKeyName: "question_bank_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_bank_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools_overview"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "question_bank_subject_fkey"
+            columns: ["subject_id", "school_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id", "school_id"]
+          },
+        ]
+      }
       school_features: {
         Row: {
           enabled_at: string
@@ -1087,6 +1456,10 @@ export type Database = {
         }[]
       }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
+      exam_transition: {
+        Args: { p_action: string; p_exam_id: string; p_note?: string }
+        Returns: Database["public"]["Enums"]["exam_status"]
+      }
       homework_overview: {
         Args: { p_class_id?: string }
         Returns: {
@@ -1115,6 +1488,11 @@ export type Database = {
         Returns: undefined
       }
       set_school_study_days: { Args: { p_days: number[] }; Returns: undefined }
+      start_exam: { Args: { p_exam_id: string }; Returns: Json }
+      submit_exam: {
+        Args: { p_answers: Json; p_exam_id: string }
+        Returns: number
+      }
       update_school_settings: {
         Args: {
           p_logo_path?: string
@@ -1136,6 +1514,10 @@ export type Database = {
         | "student"
         | "parent"
       attendance_status: "present" | "absent" | "late" | "excused"
+      exam_kind: "monthly" | "midterm" | "final" | "quiz"
+      exam_mode: "paper" | "online"
+      exam_status: "draft" | "pending" | "approved" | "published"
+      question_type: "mcq" | "true_false" | "short"
       school_status: "active" | "suspended"
     }
     CompositeTypes: {
@@ -1273,6 +1655,10 @@ export const Constants = {
         "parent",
       ],
       attendance_status: ["present", "absent", "late", "excused"],
+      exam_kind: ["monthly", "midterm", "final", "quiz"],
+      exam_mode: ["paper", "online"],
+      exam_status: ["draft", "pending", "approved", "published"],
+      question_type: ["mcq", "true_false", "short"],
       school_status: ["active", "suspended"],
     },
   },
