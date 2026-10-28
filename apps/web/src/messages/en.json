@@ -893,5 +893,24 @@
     "sent_locked": "This report was sent and can't be edited",
     "no_students": "No students in this class",
     "no_classes": "No classes available"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "bell": "Notifications",
+    "bell_unread": "Notifications, {count, plural, one {# new} other {# new}}",
+    "mark_all_read": "Mark all as read",
+    "unread": "Unread",
+    "empty": "No notifications yet",
+    "messages": {
+      "absence": "{student} was marked absent on {date}",
+      "homework_missing": "{student} didn't hand in “{title}” on time",
+      "homework_assigned": "New {subject} homework: “{title}” — due {due}",
+      "homework_graded": "Your homework “{title}” was graded: {score}",
+      "exam_scheduled": "{subject} exam “{title}” on {date}",
+      "exam_approved": "Your exam “{title}” was approved",
+      "exam_rejected": "Your exam “{title}” was sent back: {note}",
+      "grade": "Your result in “{title}”: {score} of {max}",
+      "monthly_report": "{student}'s monthly report for {month} has arrived"
+    }
   }
 }

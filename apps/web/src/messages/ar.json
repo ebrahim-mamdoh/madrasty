@@ -893,5 +893,24 @@
     "sent_locked": "أُرسل هذا التقرير ولا يمكن تعديله",
     "no_students": "لا يوجد طلاب في هذا الفصل",
     "no_classes": "لا توجد فصول متاحة"
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "bell": "الإشعارات",
+    "bell_unread": "الإشعارات، {count, plural, one {إشعار جديد} two {إشعاران جديدان} few {# إشعارات جديدة} many {# إشعارًا جديدًا} other {# إشعار جديد}}",
+    "mark_all_read": "تحديد الكل كمقروء",
+    "unread": "غير مقروء",
+    "empty": "لا توجد إشعارات بعد",
+    "messages": {
+      "absence": "تم تسجيل غياب {student} يوم {date}",
+      "homework_missing": "لم يسلّم {student} واجب «{title}» في موعده",
+      "homework_assigned": "واجب جديد في {subject}: «{title}» — آخر موعد {due}",
+      "homework_graded": "تم تقييم واجبك «{title}»: {score}",
+      "exam_scheduled": "امتحان {subject} «{title}» يوم {date}",
+      "exam_approved": "تم اعتماد امتحانك «{title}»",
+      "exam_rejected": "أُعيد امتحانك «{title}» للتعديل: {note}",
+      "grade": "نتيجتك في «{title}»: {score} من {max}",
+      "monthly_report": "وصل التقرير الشهري لـ{student} عن {month}"
+    }
   }
 }

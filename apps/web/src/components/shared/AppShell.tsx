@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Portal, SessionContext } from "@madrasty/core";
 import { AppSidebar } from "@/components/shared/AppSidebar";
 import { LocaleSwitcher } from "@/components/shared/LocaleSwitcher";
+import { NotificationBell } from "@/components/shared/NotificationBell";
 import { SessionProvider } from "@/components/shared/SessionProvider";
 import { SidebarToggle } from "@/components/shared/SidebarToggle";
 import { UserMenu } from "@/components/shared/UserMenu";
@@ -25,6 +26,8 @@ export function AppShell({ portal, session, children }: AppShellProps) {
             <SidebarToggle className="-ms-1" />
             <Separator orientation="vertical" className="h-5" />
             <div className="ms-auto flex items-center gap-1">
+              {/* School portals only: the platform owner has no school inbox. */}
+              {portal !== "platform" && <NotificationBell portal={portal} />}
               <LocaleSwitcher />
               <UserMenu />
             </div>

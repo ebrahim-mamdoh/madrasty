@@ -365,3 +365,22 @@ export type ReportRosterEntry = {
   fullName: string;
   report: MonthlyReport | null;
 };
+
+export const NOTIFICATION_KINDS = [
+  "absence",
+  "grade",
+  "homework",
+  "homework_missing",
+  "exam",
+  "monthly_report",
+] as const;
+export type NotificationKind = (typeof NOTIFICATION_KINDS)[number];
+
+/** An inbox item. `data` carries what the message needs (names, titles, ids, dates). */
+export type AppNotification = {
+  id: string;
+  kind: NotificationKind;
+  data: Record<string, string | number | boolean | null>;
+  readAt: string | null;
+  createdAt: string;
+};
