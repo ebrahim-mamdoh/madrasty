@@ -2,6 +2,7 @@
 
 import { ArrowRight, PauseCircle, PlayCircle, School } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SubscriptionCard } from "@/components/finance/SubscriptionCard";
 import { SchoolAdminsCard } from "@/components/schools/SchoolAdminsCard";
 import { SchoolFeaturesCard } from "@/components/schools/SchoolFeaturesCard";
 import { SchoolInfoCard } from "@/components/schools/SchoolInfoCard";
@@ -98,6 +99,7 @@ export function SchoolDetailPageClient({ id }: { id: string }) {
         <SchoolInfoCard key={data.name} school={data} />
         <SchoolFeaturesCard key={data.features.join()} schoolId={id} features={data.features} />
         <SchoolAdminsCard schoolId={id} />
+        <SubscriptionCard schoolId={id} />
       </div>
     </>
   );

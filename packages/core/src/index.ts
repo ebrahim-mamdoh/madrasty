@@ -15,3 +15,4 @@ export * from "./schemas/attendance";
 export * from "./schemas/homework";
 export * from "./schemas/exams";
 export * from "./schemas/reports";
+export * from "./schemas/finance";

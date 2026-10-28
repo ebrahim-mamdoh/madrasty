@@ -1,5 +1,6 @@
 import {
   Activity,
+  Banknote,
   BookOpen,
   CalendarCheck,
   CalendarClock,
@@ -9,6 +10,7 @@ import {
   LayoutDashboard,
   Layers,
   NotebookPen,
+  Package,
   School,
   Settings,
   ShieldCheck,
@@ -37,6 +39,8 @@ export type NavKey =
   | "reports"
   | "settings"
   | "monitoring"
+  | "finance"
+  | "plans"
   | "my_classes"
   | "my_subjects"
   | "my_grades"
@@ -56,6 +60,8 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
   platform: [
     { key: "dashboard", href: "/platform", icon: LayoutDashboard },
     { key: "schools", href: "/platform/schools", icon: School },
+    { key: "plans", href: "/platform/plans", icon: Package },
+    { key: "finance", href: "/platform/finance", icon: Banknote },
   ],
   admin: [
     { key: "dashboard", href: "/admin", icon: LayoutDashboard },
@@ -106,6 +112,7 @@ export const NAVIGATION: Record<Portal, NavItem[]> = {
       feature: "monthly_reports",
     },
     { key: "monitoring", href: "/admin/monitoring", icon: Activity, permission: "monitoring.view" },
+    { key: "finance", href: "/admin/finance", icon: Banknote, permission: "finance.view" },
     { key: "settings", href: "/admin/settings", icon: Settings, permission: "settings.branding" },
   ],
   teacher: [

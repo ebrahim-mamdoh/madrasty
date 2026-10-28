@@ -12,6 +12,7 @@ import { createExamsService } from "./services/exams";
 import { createReportsService } from "./services/reports";
 import { createNotificationsService } from "./services/notifications";
 import { createDashboardsService } from "./services/dashboards";
+import { createFinanceService } from "./services/finance";
 
 /**
  * Entry point of the service layer. Host apps create a Supabase client for their platform
@@ -32,6 +33,7 @@ export function createServices(client: TypedSupabaseClient) {
     reports: createReportsService(client),
     notifications: createNotificationsService(client),
     dashboards: createDashboardsService(client),
+    finance: createFinanceService(client),
   };
 }
 

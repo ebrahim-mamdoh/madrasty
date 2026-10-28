@@ -4,6 +4,7 @@ import type { AppRole } from "./roles";
 import type { AttendanceCounts, AttendanceStatus } from "./schemas/attendance";
 import type { ExamKind, ExamMode, ExamStatus, QuestionType } from "./schemas/exams";
 import type { ReportCriterion, ReportStatus } from "./schemas/reports";
+import type { BillingCycle, PaymentMethod, TransactionKind } from "./schemas/finance";
 
 export type SchoolStatus = "active" | "suspended";
 
@@ -416,4 +417,68 @@ export type TeacherMonitoringRow = {
   ungraded: number;
   examsUnpublished: number;
   reportsPending: number;
+};
+
+export type FeeItem = {
+  id: string;
+  name: string;
+  amount: number;
+  gradeLevelId: string | null;
+  gradeLevelName: string | null;
+  dueOn: string | null;
+};
+
+export type FeePayment = {
+  id: string;
+  studentId: string;
+  amount: number;
+  paidOn: string;
+  method: PaymentMethod;
+  reference: string | null;
+  note: string | null;
+};
+
+export type StudentBalance = {
+  studentId: string;
+  fullName: string;
+  classId: string;
+  className: string;
+  due: number;
+  paid: number;
+};
+
+export type Plan = {
+  id: string;
+  name: string;
+  monthlyPrice: number;
+  yearlyPrice: number;
+  features: FeatureKey[];
+  isActive: boolean;
+};
+
+export type SchoolSubscription = {
+  id: string;
+  schoolId: string;
+  schoolName: string;
+  planName: string;
+  cycle: BillingCycle;
+  startsOn: string;
+  endsOn: string;
+  amount: number;
+};
+
+export type PlatformTransaction = {
+  id: string;
+  kind: TransactionKind;
+  amount: number;
+  occurredOn: string;
+  schoolName: string | null;
+  description: string;
+};
+
+export type PlatformFinanceSummary = {
+  income: number;
+  commission: number;
+  expense: number;
+  expiring: number;
 };

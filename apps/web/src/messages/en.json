@@ -76,7 +76,8 @@
     "mcq_options": "Enter at least two options and don't leave one empty",
     "mcq_correct": "Mark the correct answer",
     "tf_correct": "Choose the correct answer",
-    "reason_required": "Write the reason"
+    "reason_required": "Write the reason",
+    "amount": "Enter a valid amount"
   },
   "errors": {
     "unauthenticated": "Your session expired, please sign in again",
@@ -145,7 +146,9 @@
     "my_grades": "My grades",
     "timetable": "Timetable",
     "schedule": "My schedule",
-    "monitoring": "Teacher follow-up"
+    "monitoring": "Teacher follow-up",
+    "finance": "Finance",
+    "plans": "Plans"
   },
   "dashboard": {
     "welcome": "Welcome, {name}",
@@ -203,7 +206,12 @@
       "schools_total": "Total schools",
       "schools_active": "Active schools",
       "students_total": "Total students",
-      "teachers_total": "Total teachers"
+      "teachers_total": "Total teachers",
+      "this_month": "This month",
+      "income": "Income",
+      "commission": "Commissions",
+      "expense": "Expenses",
+      "expiring": "Subscriptions ending within 30 days"
     },
     "schools": {
       "title": "Schools",
@@ -244,6 +252,71 @@
       "add_admin_title": "New school admin",
       "admin_added": "Admin account created",
       "no_admins": "This school has no admins"
+    },
+    "plans": {
+      "title": "Plans",
+      "subtitle": "Monthly and yearly prices and the features each plan includes",
+      "add": "New plan",
+      "create_title": "New plan",
+      "edit_title": "Edit plan",
+      "name": "Plan name",
+      "monthly_price": "Monthly price",
+      "yearly_price": "Yearly price",
+      "features": "Features",
+      "status": "Status",
+      "active": "Available",
+      "inactive": "Retired",
+      "active_hint": "Available for subscription",
+      "empty": "No plans yet"
+    },
+    "subscription": {
+      "title": "Subscription",
+      "subscribe": "Subscribe",
+      "renew": "Renew",
+      "none": "This school has no subscription yet",
+      "plan": "Plan",
+      "choose_plan": "Choose a plan",
+      "cycle": "Billing cycle",
+      "cycles": {
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      },
+      "starts_on": "Starts on",
+      "ends_on": "Ends on",
+      "days_left": "{n} days left",
+      "expired": "Expired",
+      "dialog_title": "School subscription",
+      "dialog_hint": "The plan's price is booked as income and its features are applied to the school right away",
+      "done": "Subscription recorded and school features updated"
+    },
+    "finance": {
+      "title": "Finance",
+      "subtitle": "Subscription income, commissions and expenses",
+      "add": "New entry",
+      "add_title": "New ledger entry",
+      "added": "Entry recorded",
+      "income": "Income this month",
+      "commission": "Commissions this month",
+      "expense": "Expenses this month",
+      "expiring": "Ending soon",
+      "tabs": {
+        "subscriptions": "Subscriptions",
+        "ledger": "Ledger"
+      },
+      "school": "School",
+      "period": "Period",
+      "amount": "Amount",
+      "date": "Date",
+      "kind": "Type",
+      "description": "Description",
+      "kinds": {
+        "income": "Income",
+        "expense": "Expense",
+        "commission": "Commission"
+      },
+      "no_subscriptions": "No subscriptions yet",
+      "no_subscriptions_hint": "Subscribe a school from its detail page",
+      "no_transactions": "No entries yet"
     }
   },
   "metadata": {
@@ -272,7 +345,9 @@
     "my_grades": "My grades",
     "exam_room": "Exam room",
     "reports": "Monthly reports",
-    "monitoring": "Teacher follow-up"
+    "monitoring": "Teacher follow-up",
+    "finance": "Finance",
+    "plans": "Plans"
   },
   "structure": {
     "title": "Academic structure",
@@ -969,5 +1044,58 @@
     "exams_unpublished": "Unpublished results",
     "reports_pending": "Reports not sent",
     "empty": "No active teachers"
+  },
+  "finance": {
+    "title": "Finance",
+    "admin_subtitle": "Student fees and payments for the current academic year",
+    "no_year": "Set a current academic year in “Academic structure” first",
+    "tabs": {
+      "balances": "Student accounts",
+      "fees": "Fee items"
+    },
+    "fees": {
+      "add": "Add fee",
+      "create_title": "New fee item",
+      "edit_title": "Edit fee item",
+      "name": "Item",
+      "name_placeholder": "e.g. Tuition, Bus, Books",
+      "amount": "Amount",
+      "applies_to": "Applies to",
+      "all_grades": "All grades",
+      "due_on": "Due date",
+      "empty": "No fee items for this year",
+      "empty_hint": "Add tuition and other fees so each student's dues appear",
+      "delete_title": "Delete fee item?",
+      "delete_description": "“{name}” will be removed from students' dues."
+    },
+    "balances": {
+      "student": "Student",
+      "due": "Due",
+      "paid": "Paid",
+      "remaining": "Remaining",
+      "total_due": "Total due",
+      "total_paid": "Total collected",
+      "total_remaining": "Total remaining",
+      "search": "Search by name or class…",
+      "empty": "No students enrolled this year",
+      "record": "Record payment",
+      "record_title": "Payment from {name}",
+      "remaining_now": "Currently remaining: {amount}",
+      "recorded": "Payment recorded",
+      "history": "Payment history",
+      "history_title": "{name}'s payments",
+      "no_payments": "No payments yet",
+      "amount": "Amount",
+      "paid_on": "Paid on",
+      "method": "Method",
+      "reference": "Reference (optional)",
+      "note": "Note (optional)",
+      "methods": {
+        "cash": "Cash",
+        "bank_transfer": "Bank transfer",
+        "card": "Card",
+        "online": "Online"
+      }
+    }
   }
 }
