@@ -1,0 +1,157 @@
+{
+  "common": {
+    "app_name": "Madrasty",
+    "loading": "Loading…",
+    "retry": "Retry",
+    "save": "Save",
+    "cancel": "Cancel",
+    "create": "Create",
+    "search": "Search",
+    "actions": "Actions",
+    "sign_out": "Sign out",
+    "switch_language": "العربية",
+    "previous": "Previous",
+    "next": "Next",
+    "page_of": "Page {page} of {pageCount}",
+    "toggle_sidebar": "Toggle sidebar",
+    "show_password": "Show password",
+    "hide_password": "Hide password"
+  },
+  "status": {
+    "active": "Active",
+    "suspended": "Suspended"
+  },
+  "roles": {
+    "super_admin": "Platform owner",
+    "school_admin": "School admin",
+    "staff": "Staff",
+    "teacher": "Teacher",
+    "student": "Student",
+    "parent": "Parent"
+  },
+  "features": {
+    "homework": "Homework",
+    "exams": "Exams",
+    "online_exams": "Online exams",
+    "monthly_reports": "Monthly reports",
+    "parent_app": "Parent app",
+    "online_payments": "Online payments",
+    "online_lectures": "Online lectures"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Enter a valid email address",
+    "password_min": "Password must be at least 10 characters",
+    "password_max": "Password is too long",
+    "password_letter": "Password must contain at least one letter",
+    "password_digit": "Password must contain at least one digit",
+    "slug_min": "Slug must be at least 3 characters",
+    "slug_max": "Slug must be at most 40 characters",
+    "slug_format": "Lowercase letters, digits and dashes only",
+    "name_min": "Name is too short",
+    "name_max": "Name is too long",
+    "color": "Invalid color"
+  },
+  "errors": {
+    "unauthenticated": "Your session expired, please sign in again",
+    "forbidden": "You don't have permission to do this",
+    "not_found": "Not found",
+    "conflict": "This data is already in use",
+    "validation": "Please review the entered data",
+    "rate_limited": "Too many attempts, try again shortly",
+    "network": "Could not reach the server, check your connection",
+    "unknown": "Something went wrong",
+    "invalid_credentials": "Incorrect email or password",
+    "email_exists": "This email is already registered",
+    "weak_password": "Password is too weak",
+    "account_disabled": "This account or its school has been suspended",
+    "no_web_access": "Parent accounts use the mobile app",
+    "no_access": "This account is not linked to any school",
+    "slug_taken": "This slug is already used by another school"
+  },
+  "auth": {
+    "title": "Sign in",
+    "subtitle": "Use the account details provided by your school",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "tagline": "One platform for the school, teachers, students and parents"
+  },
+  "portals": {
+    "platform": "Platform",
+    "admin": "School admin",
+    "teacher": "Teacher workspace",
+    "student": "Student portal"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "schools": "Schools",
+    "structure": "Academic structure",
+    "students": "Students",
+    "teachers": "Teachers",
+    "parents": "Parents",
+    "staff": "Staff",
+    "roles": "Roles & permissions",
+    "attendance": "Attendance",
+    "homework": "Homework",
+    "exams": "Exams",
+    "grades": "Grades",
+    "reports": "Monthly reports",
+    "settings": "School settings",
+    "my_classes": "My classes",
+    "my_subjects": "My subjects",
+    "my_grades": "My grades"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {name}",
+    "admin_subtitle": "An overview of your school",
+    "teacher_subtitle": "Your classes and daily tasks",
+    "student_subtitle": "Your subjects, homework and grades in one place",
+    "coming_soon": "This section is under construction"
+  },
+  "platform": {
+    "dashboard": {
+      "title": "Platform dashboard",
+      "subtitle": "Subscribed schools and key metrics",
+      "schools_total": "Total schools",
+      "schools_active": "Active schools",
+      "students_total": "Total students",
+      "teachers_total": "Total teachers"
+    },
+    "schools": {
+      "title": "Schools",
+      "subtitle": "Manage subscribed schools and their plans",
+      "create": "Add school",
+      "create_title": "New school",
+      "create_description": "Creates the school and its admin account in one step",
+      "name": "School name",
+      "slug": "Slug",
+      "slug_hint": "Used in links, e.g. al-noor",
+      "status": "Status",
+      "students": "Students",
+      "teachers": "Teachers",
+      "created_at": "Added on",
+      "empty": "No schools yet",
+      "empty_search": "No matching schools",
+      "search_placeholder": "Search by school name…",
+      "school_section": "School details",
+      "admin_section": "School admin account",
+      "admin_name": "Admin name",
+      "admin_email": "Admin email",
+      "admin_password": "Temporary password",
+      "features_section": "Enabled features",
+      "created_success": "School and admin account created",
+      "suspend": "Suspend school",
+      "activate": "Activate school",
+      "status_updated": "School status updated"
+    }
+  },
+  "metadata": {
+    "login": "Sign in",
+    "platform": "Platform",
+    "schools": "Schools",
+    "admin": "School admin",
+    "teacher": "Teacher workspace",
+    "student": "Student portal"
+  }
+}

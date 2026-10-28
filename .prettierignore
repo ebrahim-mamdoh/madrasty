@@ -1,0 +1,10 @@
+package-lock.json
+node_modules
+.next
+.turbo
+dist
+supabase/.temp
+packages/api/src/database.types.ts
+apps/web/src/components/ui
+*.md
+next-env.d.ts

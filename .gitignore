@@ -1,0 +1,27 @@
+# deps
+node_modules/
+
+# builds
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+.turbo/
+
+# env — only examples are committed
+.env
+.env.*
+!.env.example
+
+# supabase
+supabase/.temp/
+supabase/.branches/
+
+# misc
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+coverage/
+.vercel

@@ -1,0 +1,27 @@
+{
+  "name": "@madrasty/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./admin": "./src/admin/index.ts",
+    "./database": "./src/database.types.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@madrasty/core": "*",
+    "@supabase/supabase-js": "2.118.0"
+  },
+  "devDependencies": {
+    "@madrasty/config": "*",
+    "eslint": "9.39.5",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "madrasty",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "npm@11.16.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=@madrasty/web",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:link": "supabase link --project-ref ncwzztrihirzrtyjpwta",
+    "db:push": "supabase db push",
+    "db:diff": "supabase db diff",
+    "db:test": "supabase test db --linked",
+    "db:types": "supabase gen types typescript --linked --schema public > packages/api/src/database.types.ts"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "supabase": "2.122.0",
+    "turbo": "2.11.10",
+    "typescript": "6.0.3"
+  }
+}
