@@ -9,7 +9,7 @@
     "search": "Search",
     "actions": "Actions",
     "sign_out": "Sign out",
-    "switch_language": "العربية",
+    "switch_language": "Language",
     "previous": "Previous",
     "next": "Next",
     "page_of": "Page {page} of {pageCount}",
@@ -1096,6 +1096,22 @@
         "card": "Card",
         "online": "Online"
       }
+    }
+  },
+  "language": {
+    "page_title": "Display language",
+    "page_subtitle": "Choose the language for menus, labels and system messages across all portals",
+    "switcher_label": "Language",
+    "current": "Current language",
+    "choose": "Choose another language",
+    "saved": "Language changed",
+    "back": "Back",
+    "all_settings": "All language settings",
+    "langs": {
+      "ar": "Arabic",
+      "en": "English",
+      "ru": "Russian",
+      "zh": "Chinese"
     }
   }
 }

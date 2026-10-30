@@ -6,7 +6,7 @@ import { refreshSession } from "@/lib/supabase/proxy";
 const intlMiddleware = createIntlMiddleware(routing);
 
 /** Paths reachable without a session (after the locale prefix is stripped). */
-const PUBLIC_PATHS = ["/login"];
+const PUBLIC_PATHS = ["/login", "/language"];
 
 function splitLocale(pathname: string): { prefix: string; path: string } {
   const [, first, ...rest] = pathname.split("/");
