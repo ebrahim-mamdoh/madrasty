@@ -1,7 +1,7 @@
 "use client";
 
 import { KeyRound, Pencil, Plus, Power, PowerOff, Search, Users } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
   DEFAULT_PAGE_SIZE,
@@ -50,9 +50,11 @@ export type PeoplePageClientProps = {
 export function PeoplePageClient({ role }: PeoplePageClientProps) {
   const t = useTranslations("people");
   const tr = useTranslations(`people.${ROLE_NAMESPACE[role]}`);
+  const tTeachers = useTranslations("people.teachers");
   const tStudents = useTranslations("people.students");
   const tParents = useTranslations("people.parents");
   const tc = useTranslations("common");
+  const format = useFormatter();
   const toMessage = useErrorMessage();
   const canManage = usePermission(PERSON_MANAGE_PERMISSION[role]);
   const { searchParams, setParams } = useUrlState();
@@ -100,31 +102,91 @@ export function PeoplePageClient({ role }: PeoplePageClientProps) {
       key: "name",
       header: t("fields.full_name"),
       cell: (person) => (
-        <div className="min-w-0">
-          <p className="font-medium">{person.fullName}</p>
-          <p className="truncate text-xs text-muted-foreground" dir="ltr">
-            {person.email}
-          </p>
-        </div>
+        <span className="font-semibold text-foreground">{person.fullName}</span>
+      ),
+    },
+    {
+      key: "email",
+      header: t("fields.email"),
+      cell: (person) => (
+        <span dir="ltr" className="font-mono text-xs text-muted-foreground">
+          {person.email}
+        </span>
       ),
     },
     {
       key: "phone",
       header: t("fields.phone"),
       cell: (person) => (
-        <span dir="ltr" className="text-muted-foreground">
+        <span dir="ltr" className="text-sm text-muted-foreground font-mono">
           {person.phone ?? "—"}
         </span>
       ),
     },
+    ...(role === "teacher"
+      ? [
+          {
+            key: "subjects",
+            header: tTeachers("subjects"),
+            cell: (person: PersonListItem) => {
+              const subjects = person.teaching?.subjects ?? [];
+              if (subjects.length === 0) {
+                return (
+                  <span className="text-xs text-muted-foreground">
+                    {tTeachers("no_assignments")}
+                  </span>
+                );
+              }
+              return (
+                <div className="flex flex-wrap gap-1 max-w-xs">
+                  {subjects.map((s) => (
+                    <span
+                      key={s}
+                      className="inline-flex items-center rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              );
+            },
+          },
+          {
+            key: "classes",
+            header: tTeachers("classes"),
+            cell: (person: PersonListItem) => {
+              const assignedClasses = person.teaching?.classes ?? [];
+              if (assignedClasses.length === 0) {
+                return <span className="text-xs text-muted-foreground">—</span>;
+              }
+              return (
+                <div className="flex flex-wrap gap-1">
+                  {assignedClasses.map((c) => (
+                    <span
+                      key={c}
+                      className="inline-flex items-center rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              );
+            },
+          },
+        ]
+      : []),
     ...(role === "student"
       ? [
           {
             key: "class",
             header: tStudents("class"),
             cell: (person: PersonListItem) =>
-              person.currentClass?.name ?? (
-                <span className="text-muted-foreground">{tStudents("no_class")}</span>
+              person.currentClass?.name ? (
+                <span className="inline-flex items-center rounded-md bg-primary/10 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                  {person.currentClass.name}
+                </span>
+              ) : (
+                <span className="text-xs text-muted-foreground">{tStudents("no_class")}</span>
               ),
           },
           {
@@ -140,6 +202,19 @@ export function PeoplePageClient({ role }: PeoplePageClientProps) {
             key: "children",
             header: tParents("children"),
             cell: (person: PersonListItem) => namesOf(person),
+          },
+        ]
+      : []),
+    ...(role === "staff"
+      ? [
+          {
+            key: "created_at",
+            header: t("fields.created_at"),
+            cell: (person: PersonListItem) => (
+              <span className="text-xs text-muted-foreground">
+                {format.dateTime(new Date(person.createdAt), { dateStyle: "medium" })}
+              </span>
+            ),
           },
         ]
       : []),
@@ -305,7 +380,16 @@ export function PeoplePageClient({ role }: PeoplePageClientProps) {
 function namesOf(person: PersonListItem) {
   const names = person.links?.map((link) => link.fullName) ?? [];
   return names.length > 0 ? (
-    <span className="text-sm">{names.join("، ")}</span>
+    <div className="flex flex-wrap gap-1">
+      {names.map((name) => (
+        <span
+          key={name}
+          className="inline-flex items-center rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-foreground"
+        >
+          {name}
+        </span>
+      ))}
+    </div>
   ) : (
     <span className="text-muted-foreground">—</span>
   );

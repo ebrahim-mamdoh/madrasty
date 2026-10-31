@@ -25,12 +25,17 @@ export function HomeworkTable({ rows, isLoading, basePath }: HomeworkTableProps)
       header: t("title_field"),
       cell: (row) => (
         <div className="min-w-0">
-          <Link href={`${basePath}/${row.id}`} className="font-medium hover:underline">
+          <Link href={`${basePath}/${row.id}`} className="font-semibold text-foreground hover:underline">
             {row.title}
           </Link>
-          <p className="truncate text-xs text-muted-foreground">
-            {row.className} — {row.subjectName}
-          </p>
+          <div className="mt-1 flex flex-wrap items-center gap-1.5">
+            <span className="inline-flex items-center rounded bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+              {row.className}
+            </span>
+            <span className="inline-flex items-center rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+              {row.subjectName}
+            </span>
+          </div>
         </div>
       ),
     },
@@ -52,8 +57,9 @@ export function HomeworkTable({ rows, isLoading, basePath }: HomeworkTableProps)
     {
       key: "submitted",
       header: t("submitted_count"),
+      className: "text-center tabular-nums",
       cell: (row) => (
-        <span className="tabular-nums">
+        <span className="tabular-nums font-medium">
           {format.number(row.submitted)} / {format.number(row.students)}
         </span>
       ),
@@ -61,7 +67,8 @@ export function HomeworkTable({ rows, isLoading, basePath }: HomeworkTableProps)
     {
       key: "graded",
       header: t("graded_count"),
-      cell: (row) => <span className="tabular-nums">{format.number(row.graded)}</span>,
+      className: "text-center tabular-nums",
+      cell: (row) => <span className="tabular-nums font-medium">{format.number(row.graded)}</span>,
     },
   ];
 

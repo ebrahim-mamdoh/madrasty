@@ -68,11 +68,22 @@ export function BalancesPanel({ yearId }: { yearId: string }) {
         </div>
       ),
     },
-    { key: "due", header: t("due"), cell: (row) => <span className="tabular-nums">{money(row.due)}</span> },
-    { key: "paid", header: t("paid"), cell: (row) => <span className="tabular-nums">{money(row.paid)}</span> },
+    {
+      key: "due",
+      header: t("due"),
+      className: "text-end tabular-nums",
+      cell: (row) => <span className="tabular-nums">{money(row.due)}</span>,
+    },
+    {
+      key: "paid",
+      header: t("paid"),
+      className: "text-end tabular-nums",
+      cell: (row) => <span className="tabular-nums">{money(row.paid)}</span>,
+    },
     {
       key: "balance",
       header: t("remaining"),
+      className: "text-end tabular-nums",
       cell: (row) => {
         const remaining = row.due - row.paid;
         return (

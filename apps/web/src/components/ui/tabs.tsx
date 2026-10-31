@@ -5,16 +5,24 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Tabs as TabsPrimitive } from "radix-ui"
 
+import { useLocale } from "next-intl"
+import { localeDirection } from "@/i18n/routing"
+
 function Tabs({
   className,
   orientation = "horizontal",
+  dir,
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Root>) {
+  const locale = useLocale()
+  const direction = dir ?? localeDirection(locale)
+
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
       data-orientation={orientation}
       orientation={orientation}
+      dir={direction}
       className={cn(
         "group/tabs flex gap-2 data-[orientation=horizontal]:flex-col",
         className

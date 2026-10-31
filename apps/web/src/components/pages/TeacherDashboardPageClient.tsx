@@ -1,7 +1,7 @@
 "use client";
 
 import { Activity, CalendarCheck, ClipboardList, Clock, Megaphone, NotebookPen } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { AttentionList, type AttentionItem } from "@/components/dashboard/AttentionList";
 import { ExamStatusBadge } from "@/components/exams/ExamStatusBadge";
 import { EmptyState } from "@/components/shared/EmptyState";
@@ -18,6 +18,8 @@ import { Link } from "@/i18n/navigation";
 export function TeacherDashboardPageClient() {
   const t = useTranslations("dashboard");
   const tc = useTranslations("common");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const format = useFormatter();
   const toMessage = useErrorMessage();
   const { profile } = useSession();
@@ -101,7 +103,7 @@ export function TeacherDashboardPageClient() {
                       <p className="font-medium">{lesson.subjectName}</p>
                       <p className="text-sm text-muted-foreground">{lesson.className}</p>
                     </div>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground tabular-nums" dir="ltr">
+                    <span className="flex items-center gap-1 text-xs text-muted-foreground tabular-nums" dir={isRtl ? "rtl" : "ltr"}>
                       <Clock aria-hidden className="size-3.5" />
                       {lesson.startsAt} – {lesson.endsAt}
                     </span>

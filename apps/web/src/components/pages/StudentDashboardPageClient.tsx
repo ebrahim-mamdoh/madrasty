@@ -1,7 +1,7 @@
 "use client";
 
 import { CalendarCheck, ClipboardList, Clock, NotebookPen, Percent } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { ATTENDANCE_STATUSES, attendanceRate, homeworkStatus } from "@madrasty/core";
 import { AttentionList, type AttentionItem } from "@/components/dashboard/AttentionList";
 import { PageHeader } from "@/components/shared/PageHeader";
@@ -18,6 +18,8 @@ import { todayIn } from "@/lib/dates";
 /** Student home, composed from the same (cached) queries the student's pages use. */
 export function StudentDashboardPageClient() {
   const t = useTranslations("dashboard");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const format = useFormatter();
   const { profile, school } = useSession();
   const homeworkOn = useFeature("homework");
@@ -130,7 +132,7 @@ export function StudentDashboardPageClient() {
                         <p className="font-medium">{entry.subject.name}</p>
                         <p className="text-sm text-muted-foreground">{entry.teacher?.fullName ?? "—"}</p>
                       </div>
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground tabular-nums" dir="ltr">
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground tabular-nums" dir={isRtl ? "rtl" : "ltr"}>
                         <Clock aria-hidden className="size-3.5" />
                         {period!.startsAt} – {period!.endsAt}
                       </span>

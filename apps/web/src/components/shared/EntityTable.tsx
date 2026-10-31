@@ -58,8 +58,8 @@ export function EntityTable<T>({
               </TableHead>
             ))}
             {actions && (
-              <TableHead className="w-24">
-                <span className="sr-only">{actionsLabel}</span>
+              <TableHead className="w-28 text-end">
+                {actionsLabel ? <span>{actionsLabel}</span> : <span className="sr-only">Actions</span>}
               </TableHead>
             )}
           </TableRow>

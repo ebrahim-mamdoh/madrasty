@@ -118,6 +118,57 @@ export function createPeopleService(client: TypedSupabaseClient) {
         );
       }
 
+      if (role === "teacher") {
+        let query = client
+          .from("profiles")
+          .select(
+            `${BASE_COLUMNS},
+             teaching:class_subjects!class_subjects_teacher_id_school_id_fkey(
+               subject:subjects!class_subjects_subject_id_school_id_fkey(id, name),
+               class:classes!class_subjects_class_id_school_id_fkey(id, name)
+             )`,
+            { count: "exact" },
+          )
+          .eq("role", "teacher");
+        if (search) query = query.ilike("full_name", likePattern(search));
+
+        const { data, count, error } = await query.order("full_name").range(from, to);
+        const rows = unwrap({ data, error });
+        return toPaginated(
+          rows.map((row) => {
+            const rawTeaching = (row.teaching as Array<{
+              subject: { id: string; name: string } | null;
+              class: { id: string; name: string } | null;
+            }>) ?? [];
+            const subjects = Array.from(
+              new Set(
+                rawTeaching
+                  .map((t) => t.subject?.name)
+                  .filter((name): name is string => Boolean(name)),
+              ),
+            );
+            const classes = Array.from(
+              new Set(
+                rawTeaching
+                  .map((t) => t.class?.name)
+                  .filter((name): name is string => Boolean(name)),
+              ),
+            );
+            return {
+              id: row.id,
+              fullName: row.full_name,
+              email: row.email,
+              phone: row.phone,
+              isActive: row.is_active,
+              createdAt: row.created_at,
+              teaching: { subjects, classes },
+            };
+          }),
+          count ?? 0,
+          params,
+        );
+      }
+
       let query = client.from("profiles").select(BASE_COLUMNS, { count: "exact" }).eq("role", role);
       if (search) query = query.ilike("full_name", likePattern(search));
 

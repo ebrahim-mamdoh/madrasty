@@ -35,13 +35,34 @@ export function AttendanceReportPanel({ classId, month, onMonthChange }: Attenda
       header: t("student"),
       cell: (row) => <span className="font-medium">{row.fullName}</span>,
     },
-    { key: "present", header: t("status.present"), cell: (row) => count(row.present) },
-    { key: "absent", header: t("status.absent"), cell: (row) => count(row.absent) },
-    { key: "late", header: t("status.late"), cell: (row) => count(row.late) },
-    { key: "excused", header: t("status.excused"), cell: (row) => count(row.excused) },
+    {
+      key: "present",
+      header: t("status.present"),
+      cell: (row) => count(row.present),
+      className: "text-center tabular-nums",
+    },
+    {
+      key: "absent",
+      header: t("status.absent"),
+      cell: (row) => count(row.absent),
+      className: "text-center tabular-nums",
+    },
+    {
+      key: "late",
+      header: t("status.late"),
+      cell: (row) => count(row.late),
+      className: "text-center tabular-nums",
+    },
+    {
+      key: "excused",
+      header: t("status.excused"),
+      cell: (row) => count(row.excused),
+      className: "text-center tabular-nums",
+    },
     {
       key: "rate",
       header: t("rate"),
+      className: "text-center tabular-nums",
       cell: (row) => {
         const rate = attendanceRate(row);
         return rate === null ? (

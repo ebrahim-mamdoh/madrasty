@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock, Pencil, Plus, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { MAX_PERIODS, type Period, type PeriodFormValues } from "@madrasty/core";
 import { ConfirmDialog } from "@/components/shared/ConfirmDialog";
 import { EmptyState } from "@/components/shared/EmptyState";
@@ -45,6 +45,7 @@ export function PeriodsPanel() {
   const remove = useDeletePeriod();
   const dialogs = useCrudDialogs<Period>();
 
+  const isRtl = useLocale() === "ar";
   const columns: EntityColumn<Period>[] = [
     {
       key: "number",
@@ -55,7 +56,7 @@ export function PeriodsPanel() {
       key: "time",
       header: t("time"),
       cell: (period) => (
-        <span className="tabular-nums text-muted-foreground" dir="ltr">
+        <span className="tabular-nums text-muted-foreground" dir={isRtl ? "rtl" : "ltr"}>
           {period.startsAt} – {period.endsAt}
         </span>
       ),

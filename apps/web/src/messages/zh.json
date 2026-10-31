@@ -452,7 +452,8 @@
       "phone_hint": "可选",
       "password": "临时密码",
       "password_hint": "复制后分享给账号所有者",
-      "status": "状态"
+      "status": "状态",
+      "created_at": "加入日期"
     },
     "generate": "生成",
     "copy": "复制",
@@ -477,7 +478,10 @@
       "add": "添加教师",
       "create_title": "新建教师",
       "edit_title": "编辑教师",
-      "empty": "暂无教师"
+      "empty": "暂无教师",
+      "subjects": "任教科目",
+      "classes": "任教班级",
+      "no_assignments": "暂无分配"
     },
     "students": {
       "title": "学生",
@@ -630,6 +634,7 @@
       "5": "周五",
       "6": "周六"
     },
+    "day": "星期",
     "period": "课节",
     "period_n": "第{n}节",
     "class": "班级",

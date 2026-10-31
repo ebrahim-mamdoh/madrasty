@@ -45,9 +45,7 @@ export function SchoolsTable({ schools, isLoading, onStatusChange }: SchoolsTabl
             <TableHead className="text-end">{t("students")}</TableHead>
             <TableHead className="text-end">{t("teachers")}</TableHead>
             <TableHead>{t("created_at")}</TableHead>
-            <TableHead className="w-12">
-              <span className="sr-only">{tc("actions")}</span>
-            </TableHead>
+            <TableHead className="w-20 text-end">{tc("actions")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -86,7 +84,7 @@ export function SchoolsTable({ schools, isLoading, onStatusChange }: SchoolsTabl
                   <TableCell className="text-muted-foreground">
                     {format.dateTime(new Date(school.createdAt), { dateStyle: "medium" })}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="icon" aria-label={tc("actions")}>

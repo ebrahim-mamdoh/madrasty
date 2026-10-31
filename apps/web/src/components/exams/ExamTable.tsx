@@ -25,12 +25,17 @@ export function ExamTable({
       header: t("title_field"),
       cell: (exam) => (
         <div className="min-w-0">
-          <Link href={`${basePath}/${exam.id}`} className="font-medium hover:underline">
+          <Link href={`${basePath}/${exam.id}`} className="font-semibold text-foreground hover:underline">
             {exam.title}
           </Link>
-          <p className="truncate text-xs text-muted-foreground">
-            {exam.className} — {exam.subjectName}
-          </p>
+          <div className="mt-1 flex flex-wrap items-center gap-1.5">
+            <span className="inline-flex items-center rounded bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+              {exam.className}
+            </span>
+            <span className="inline-flex items-center rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
+              {exam.subjectName}
+            </span>
+          </div>
         </div>
       ),
     },

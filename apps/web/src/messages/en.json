@@ -452,7 +452,8 @@
       "phone_hint": "Optional",
       "password": "Temporary password",
       "password_hint": "Copy it and share it with the account owner",
-      "status": "Status"
+      "status": "Status",
+      "created_at": "Joined Date"
     },
     "generate": "Generate",
     "copy": "Copy",
@@ -477,7 +478,10 @@
       "add": "Add teacher",
       "create_title": "New teacher",
       "edit_title": "Edit teacher",
-      "empty": "No teachers yet"
+      "empty": "No teachers yet",
+      "subjects": "Assigned Subjects",
+      "classes": "Classes",
+      "no_assignments": "No assignments"
     },
     "students": {
       "title": "Students",
@@ -630,6 +634,7 @@
       "5": "Friday",
       "6": "Saturday"
     },
+    "day": "Day",
     "period": "Period",
     "period_n": "Period {n}",
     "class": "Class",

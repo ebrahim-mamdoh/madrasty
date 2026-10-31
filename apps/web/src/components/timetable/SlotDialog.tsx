@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader2, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import type { Period, TimetableEntry } from "@madrasty/core";
 import { AppDialogContent } from "@/components/shared/AppDialogContent";
@@ -86,6 +86,7 @@ export function SlotDialog({ classId, target, onOpenChange }: SlotDialogProps) {
 
   const options = subjects.data ?? [];
 
+  const isRtl = useLocale() === "ar";
   return (
     <Dialog open={Boolean(target)} onOpenChange={(next) => !next && !isPending && close()}>
       <AppDialogContent className="sm:max-w-md">
@@ -96,7 +97,7 @@ export function SlotDialog({ classId, target, onOpenChange }: SlotDialogProps) {
           </DialogTitle>
           <DialogDescription dir="auto">
             {target && (
-              <span dir="ltr">
+              <span dir={isRtl ? "rtl" : "ltr"}>
                 {target.period.startsAt} – {target.period.endsAt}
               </span>
             )}

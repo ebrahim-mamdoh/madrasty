@@ -113,6 +113,8 @@ export type PersonListItem = {
   currentClass?: { id: string; name: string } | null;
   /** Students: linked parents. Parents: linked children. */
   links?: { id: string; fullName: string }[];
+  /** Teachers: their assigned subjects and classes. */
+  teaching?: { subjects: string[]; classes: string[] };
 };
 
 /** Minimal person reference for pickers (e.g. choosing a homeroom teacher). */
